@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-21",
+  "sections": [
+    {
+      "key": "europe",
+      "name": "欧盟与欧洲",
+      "items": [
+        {
+          "title": "EDPB 发布首份智能眼镜声明：制造商不能以「用户告知路人」免责",
+          "summary": "10月13日，欧洲数据保护委员会（EDPB）在全体会议上通过《关于智能眼镜的第1/2026号声明》，这是其首次将配备摄像头的可穿戴设备作为独立高风险品类发声。声明核心立场：智能眼镜制造商与关联 AI 服务商在设备设计阶段即为数据控制者，须依 GDPR 第25条落实「设计与默认的数据保护」—— recording 指示灯（LED、声音提示等）须默认开启且不可被用户永久关闭；拍摄内容若发布至公开社交网络，佩戴者本人将失去「家庭豁免」而成为完整意义上的控制者；涉及人脸/生物识别功能的还须满足第9条特殊类别数据规则。声明同时点名医院、学校、职场等敏感场景需更高审查标准。涉及行业：智能眼镜制造商、AI 服务提供商、消费电子零售。同期还发布了 SPE 专家报告《The connected gaze》。",
+          "url": "https://www.edpb.europa.eu/news/edpb-publishes-statement-on-the-data-protection-challenges-of-smart-glasses_en",
+          "source_note": "EDPB 官网新闻稿",
+          "industry": "智能眼镜、AI 服务、消费电子",
+          "authority": "EDPB",
+          "item_date": "2026-10-13",
+          "legal_basis": "GDPR 第25条、第9条、第2(2)(c)条",
+          "amount": ""
+        },
+        {
+          "title": "EDPB 确定2026年协同执法行动（CEF）主题：透明度与告知义务",
+          "summary": "10月14日，EDPB 在10月全体会议上选定第五次协同执法行动（CEF）主题为 GDPR 第12、13、14条下的透明度与告知义务——即企业是否以清晰、可及的方式告知个人其数据如何被处理。各成员国监管机构将在未来数周内自愿加入，并于2026年内展开全国性平行检查，结果汇总为欧洲层面的分析。这意味着隐私政策、App 内告知文案、cookie 说明的清晰度将成为明年欧盟执法的统一靶点。涉及行业：全部面向欧盟用户的行业，尤其是 APP 运营商、电商与在线服务。",
+          "url": "https://www.edpb.europa.eu/news_en",
+          "source_note": "EDPB 官网（10月14日新闻稿，见新闻列表）；线索来源：GRC Report",
+          "industry": "全行业（APP 运营商、电商、在线服务）",
+          "authority": "EDPB",
+          "item_date": "2026-10-14",
+          "legal_basis": "GDPR 第12、13、14条",
+          "amount": ""
+        },
+        {
+          "title": "荷兰监管机构对 Uber 开出 8.25 亿欧元罚单：自动化决策与画像透明度违规",
+          "summary": "据 EDPB 成员国动态汇总（10月8日发布），荷兰数据保护局（AP）对 Uber 处以 824,990,000 欧元罚款，事由为违法的自动化决策及对画像处理的信息告知不足。这是 GDPR 历史上金额最高的罚单之一，直接针对平台用算法对司机进行管理、分配和评估时未充分告知、未保障人工干预权利的问题。涉及行业：网约车/零工经济平台、一切使用算法管理劳动者的平台企业。",
+          "url": "https://www.edpb.europa.eu/news_en",
+          "source_note": "线索来源：EDPB 成员国动态汇总；荷兰 AP 官网原文链接待补",
+          "industry": "网约车平台、零工经济、算法管理",
+          "authority": "荷兰 AP",
+          "item_date": "2026-10-08",
+          "legal_basis": "GDPR（自动化决策与画像告知义务）",
+          "amount": "824,990,000 欧元"
+        },
+        {
+          "title": "挪威监管机构对微软旗下广告科技公司 Xandr 罚款 860 万欧元（Grindr 案）",
+          "summary": "挪威数据保护局（Datatilsynet）对微软旗下广告科技公司 Xandr 处以 9200 万挪威克朗（约 860 万欧元）罚款，最终决定于10月2日作出，10月中旬公布。该案源于2020年 noyb 与挪威消费者委员会的联合投诉：Xandr 在程序化广告交易中处理并分享了交友应用 Grindr 用户的敏感个人数据，缺乏有效法律依据。监管机构明确表示：广告技术链条中的幕后公司不能以「假设前端 App 已取得同意」为由推卸自身责任。涉及行业：广告科技（AdTech）、APP 运营商。",
+          "url": "https://www.edpb.europa.eu/news_en",
+          "source_note": "线索来源：noyb、EDPB 成员国动态汇总（10月16日列入）",
+          "industry": "广告科技、约会/社交 APP",
+          "authority": "挪威 Datatilsynet",
+          "item_date": "2026-10-12",
+          "legal_basis": "GDPR 第6条、第9条",
+          "amount": "9200 万挪威克朗（约 860 万欧元）"
+        },
+        {
+          "title": "意大利 Garante 对 IQVIA 罚款 700 万欧元：违法处理患者健康数据",
+          "summary": "据 EDPB 成员国动态汇总（10月9日发布），意大利数据保护局（Garante）对医疗数据与临床研究服务商 IQVIA 处以 700 万欧元罚款，事由为违法处理患者健康数据。健康数据属 GDPR 第9条特殊类别，本案再次表明受托处理医疗数据的 CRO/数据服务商会被作为直接责任主体追责。涉及行业：医疗健康数据、临床研究服务（CRO）、医疗 AI。",
+          "url": "https://www.edpb.europa.eu/news_en",
+          "source_note": "线索来源：EDPB 成员国动态汇总；Garante 官网原文链接待补",
+          "industry": "医疗健康数据、临床研究服务",
+          "authority": "意大利 Garante",
+          "item_date": "2026-10-09",
+          "legal_basis": "GDPR 第9条（特殊类别数据）",
+          "amount": "700 万欧元"
+        },
+        {
+          "title": "意大利 Garante 对 BBVA 罚款 550.8 万欧元：未尊重客户拒绝直接营销的权利",
+          "summary": "据 EDPB 成员国动态汇总（10月9日发布），意大利 Garante 对西班牙对外银行（BBVA）处以 5,508,000 欧元罚款，事由为未尊重客户针对直接营销的反对权。金融机构依据 GDPR 第21条必须提供便捷、可执行的反对直达渠道，本案显示「反对权落空」本身即构成高额处罚事由。涉及行业：银行、金融服务、电销/直邮营销。",
+          "url": "https://www.edpb.europa.eu/news_en",
+          "source_note": "线索来源：EDPB 成员国动态汇总；Garante 官网原文链接待补",
+          "industry": "银行与金融服务",
+          "authority": "意大利 Garante",
+          "item_date": "2026-10-09",
+          "legal_basis": "GDPR 第21条（反对权）",
+          "amount": "5,508,000 欧元"
+        },
+        {
+          "title": "CNIL 关闭对 Google 的合规禁令：3.25 亿欧元罚单后的整改获认可",
+          "summary": "10月14日，法国 CNIL 公布其限制合议庭9月23日决定：正式关闭2025年9月1日对 Google LLC 与 Google Ireland 发出的合规禁令。此前 Google 因 cookie 与 Gmail 广告问题被罚 3.25 亿欧元，并被责令六个月内完成两项整改（开户时明确告知广告 cookie 的必然植入；Gmail 邮件间插入的广告须取得同意并显著区分于私人邮件），逾期每日滞纳金 10 万欧元。CNIL 认定 Google 已按期完成整改，故关闭禁令。涉及行业：大型科技平台、广告服务。",
+          "url": "https://www.cnil.fr/en/closure-injunction-google",
+          "source_note": "CNIL 官网",
+          "industry": "科技平台、在线广告",
+          "authority": "法国 CNIL",
+          "item_date": "2026-10-14",
+          "legal_basis": "法国邮政与电子通信法典 L.34-5 条（ePrivacy 转化）",
+          "amount": "原罚款 3.25 亿欧元；滞纳金威胁每日 10 万欧元"
+        },
+        {
+          "title": "noyb 发布2025年报：全年提起 21 起投诉，正筹备首例集体求偿诉讼",
+          "summary": "10月13日，欧洲数字权利中心 noyb 发布2025年度报告：全年新提起 21 起 GDPR 投诉，在办案件累计 460 起，并正筹备针对征信机构 CRIF 的首例集体救济（collective redress）诉讼；年报同时披露其围绕欧盟《数字综合法案》（Digital Omnibus）对千余项修正案的政策分析。信号意义：隐私 NGO 正从「投诉驱动监管」转向「集体索赔 + 立法游说」双轨，企业面临的私法风险上升。涉及行业：征信、广告科技、平台企业。",
+          "url": "https://ppc.land/noyb-filed-21-gdpr-complaints-in-2025-as-omnibus-fight-limited-resources/",
+          "source_note": "线索来源：noyb（经 PPC Land 报道，10月13日）",
+          "industry": "征信机构、广告科技",
+          "authority": "noyb（欧洲数字权利中心）",
+          "item_date": "2026-10-13",
+          "legal_basis": "GDPR 第80条、欧盟集体救济指令",
+          "amount": ""
+        }
+      ]
+    },
+    {
+      "key": "north_america",
+      "name": "北美",
+      "items": [
+        {
+          "title": "HHS OCR 第56起「访问权」执法：宾州牙科诊所 Shen Smiles 和解支付 14 万美元",
+          "summary": "10月8日，美国卫生与公众服务部民权办公室（HHS OCR）宣布与宾夕法尼亚州牙科机构 Shen Smiles（Linda L. Shen, dba Shen Smiles, P.C.）达成和解：该机构多次拒绝向患者及时提供其受保护健康信息（PHI），并以「员工窃取病历」为由主张无法提供。OCR 认定其缺乏访问权政策、培训及 PHI 安全保障，违反 HIPAA 隐私规则与泄露通知规则，和解金额 14 万美元。这是 OCR 第56起 HIPAA 访问权（Right of Access）执法行动，显示该系列执法仍在持续推进。涉及行业：医疗健康服务机构。",
+          "url": "https://www.linkedin.com/posts/privacy-and-security-brainiacs_notice-of-proposed-determination-dr-linda-activity-7515070006297128960-gOHS",
+          "source_note": "线索来源：Privacy and Security Brainiacs（LinkedIn，含 HHS 决议协议与拟处罚通知链接）；HHS OCR 官网新闻稿链接待补",
+          "industry": "医疗健康服务",
+          "authority": "美国 HHS OCR",
+          "item_date": "2026-10-08",
+          "legal_basis": "HIPAA 隐私规则、泄露通知规则",
+          "amount": "14 万美元"
+        }
+      ]
+    },
+    {
+      "key": "asia_pacific",
+      "name": "亚太",
+      "items": [
+        {
+          "title": "澳大利亚 OAIC 正式调查 HeyCyan 智能眼镜 App 开发商深圳青橙，Kmart 紧急下架相关产品",
+          "summary": "10月7日，澳大利亚信息专员办公室（OAIC）宣布对深圳市青橙未来科技有限公司启动正式调查。HeyCyan 是 Kmart 所售 Anko 智能眼镜及 Big W、Amazon 渠道多款低价智能眼镜的配套 App。OAIC 自8月12日起向 Meta、Google、Kmart 及深圳青橙等发出初步问询，要求说明设备如何记录、谁可访问、数据存储于何处；深圳青橙未作任何回应，隐私专员 Carly Kind 据此启动调查并动用强制取证权，同时致函零售商呼吁评估是否继续销售相关设备。Kmart 随后已将89澳元的 Anko 摄像眼镜从线上渠道下架。涉及行业：智能眼镜、IoT 配套软件、消费电子零售供应链。",
+          "url": "https://www.oaic.gov.au/news/media-centre/oaic-opens-investigation-into-maker-of-heycyan-smart-glasses-phone-app",
+          "source_note": "OAIC 官网新闻稿及专员博客（Smart glasses under the microscope）",
+          "industry": "智能眼镜、IoT 软件、消费电子零售",
+          "authority": "澳大利亚 OAIC",
+          "item_date": "2026-10-07",
+          "legal_basis": "澳大利亚《1988年隐私法》APP 1、第40(2)条",
+          "amount": ""
+        }
+      ]
+    }
+  ]
+}

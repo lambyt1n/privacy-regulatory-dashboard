@@ -1,0 +1,18 @@
+{
+  "weeks": [
+    {
+      "date": "2026-10-25",
+      "report": "reports/2026-10-25.json",
+      "article": "articles/2026-10-25.md",
+      "headline": "AI监管风暴周：欧盟GDPR修订引数字征用争议，美国州级执法火力全开——Meta 250亿美元、得州起诉OpenAI、挪威Xandr 860万欧元",
+      "item_count": 15
+    },
+    {
+      "date": "2026-10-21",
+      "report": "reports/2026-10-21.json",
+      "article": "articles/2026-10-21.md",
+      "headline": "智能眼镜站上监管风口：EDPB 首发声明、OAIC 调查深圳青橙；荷兰 AP 对 Uber 开出 8.25 亿欧元罚单",
+      "item_count": 10
+    }
+  ]
+}

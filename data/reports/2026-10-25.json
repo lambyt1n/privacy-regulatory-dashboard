@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-25",
+  "sections": [
+    {
+      "key": "europe",
+      "name": "欧盟与欧洲",
+      "items": [
+        {
+          "title": "EDPB确定2026年协调执法主题为GDPR透明度义务",
+          "summary": "2026年10月14日，EDPB在全体会议上确定2026年第五次协调执法行动（CEF）的主题为GDPR下的透明度与信息义务（第12、13、14条）。25个成员国数据保护机构将自愿参与，在2026年内对各行业控制者开展执法行动或事实调查，评估其是否以清晰、简洁、易懂的方式向个人说明数据处理活动。调查结果将在下半年汇总分析，形成统一报告。",
+          "url": "https://www.edpb.europa.eu/news/news/2026/cef-2026-edpb-launches-coordinated-enforcement-action-transparency-and-information_de",
+          "source_note": "",
+          "industry": "全行业（网站、APP、SaaS等）",
+          "authority": "EDPB（欧洲数据保护委员会）",
+          "item_date": "2026-10-14",
+          "legal_basis": "GDPR第12、13、14条",
+          "amount": ""
+        },
+        {
+          "title": "挪威数据保护局对微软Xandr开出860万欧元罚单",
+          "summary": "2026年10月2日，挪威数据保护局（Datatilsynet）对微软旗下广告技术公司Xandr Inc.作出最终处罚决定，处以860万欧元（约9200万挪威克朗）行政罚款，系挪威史上最大数据保护罚单。Xandr被认定在2018年7月至2020年4月期间，未经合法依据处理同性恋社交应用Grindr用户的个人数据（包括广告ID和IP地址），且处理了涉及性取向的特殊类别个人数据，违反GDPR第6条和第9条。挪威消费者委员会于2020年提起投诉。EDPB于10月16日发布该决定摘要。",
+          "url": "https://www.edpb.europa.eu/news/norwegian-dpa-fines-xandr-eur-8-600-000-for-unlawful-processing-of-personal-data_en",
+          "source_note": "线索来源：noyb（noyb于2020年对Xandr提起投诉）",
+          "industry": "在线广告/程序化广告（AdTech）",
+          "authority": "挪威数据保护局（Datatilsynet）",
+          "item_date": "2026-10-02",
+          "legal_basis": "GDPR第6条（合法性基础）、第9条（特殊类别数据）",
+          "amount": "€8,600,000"
+        },
+        {
+          "title": "欧盟成员国理事会通过GDPR修订为AI公司开辟数据征用通道",
+          "summary": "2026年10月22日，欧盟成员国理事会在德国等大国支持下通过了一项极具争议的GDPR修订提案，拟新增第88bis条。该条款规定，AI公司在AI相关场景中使用个人数据时，可自动推定其拥有压倒性合法利益，无需征得用户同意。这意味着AI公司的商业利益将优先于用户的基本权利，且适用于从未成为AI公司客户的个人、数十年前的数据（如聊天记录、社交媒体内容）。noyb强烈批评此举为数字征用。",
+          "url": "https://noyb.eu/en/ai-eu-member-states-approve-digital-expropriation-europeans-ai-companies",
+          "source_note": "线索来源：noyb",
+          "industry": "AI服务/大模型开发",
+          "authority": "欧盟理事会（EU Council）",
+          "item_date": "2026-10-22",
+          "legal_basis": "GDPR拟议修订（第88bis条）",
+          "amount": ""
+        },
+        {
+          "title": "柏林数据保护局认定德国主要政党微定向广告违法",
+          "summary": "2026年10月21日，noyb公布柏林数据保护局（Berlin DPA）于2026年9月24日发出的四份结案函。2023年noyb对德国主要政党（CDU、SPD、绿党、左翼党）在2021年联邦大选期间通过Facebook进行政治微定向广告提起投诉。柏林DPA认定这些政党未获得用户同意等合法基础，即基于政治兴趣对选民进行定向投放，违反了GDPR，并对四党发出谴责（reprimand）。noyb律师Felix Mikolasch表示微定向对民主构成威胁。",
+          "url": "https://noyb.eu/en/noyb-win-german-dpa-finds-microtargeting-major-political-parties-illegal",
+          "source_note": "线索来源：noyb",
+          "industry": "社交媒体广告/政治广告",
+          "authority": "柏林数据保护局（Berlin DPA）",
+          "item_date": "2026-09-24",
+          "legal_basis": "GDPR第6条（合法性基础）",
+          "amount": ""
+        },
+        {
+          "title": "英国ICO完成AI基础模型监管计划并启动AI代理证据征集",
+          "summary": "2026年10月8日，英国信息委员会（ICO于9月30日改制为新法人机构）宣布完成历时约两年的AI基础模型开发者监管计划，从OpenAI、Google、Microsoft、Meta、Amazon、Apple、Anthropic、Cohere、DeepSeek、Stability AI十家公司获得数据保护改进承诺，涉及透明度、用户权利行使机制和安全保障三大领域。同日，ICO启动为期六周的AI代理（agentic AI）证据征集，截止日期为2026年11月20日，聚焦自主AI系统的数据保护风险。xAI/Grok因未配合而转入正式调查。",
+          "url": "https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/",
+          "source_note": "线索来源：MLex",
+          "industry": "AI服务/大模型开发",
+          "authority": "英国信息委员会（ICO）",
+          "item_date": "2026-10-08",
+          "legal_basis": "UK GDPR、Data Protection Act 2018",
+          "amount": ""
+        },
+        {
+          "title": "英国ICO对伦敦警察厅信息治理失职采取监管行动",
+          "summary": "2026年10月14日，英国信息委员会（ICO）对伦敦警察厅（Metropolitan Police Service）采取监管行动，因其在信息治理方面存在严重缺陷。ICO指出该机构未能妥善保护所处理的个人数据，存在系统性的信息管理漏洞。",
+          "url": "https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/",
+          "source_note": "",
+          "industry": "公共部门/执法机构",
+          "authority": "英国信息委员会（ICO）",
+          "item_date": "2026-10-14",
+          "legal_basis": "UK GDPR",
+          "amount": ""
+        },
+        {
+          "title": "英国ICO谴责威尔士两机构因弱密码导致3300名儿童数据泄露",
+          "summary": "2026年10月20日，英国信息委员会（ICO）对Ogi Networks Limited（ONL）和Data Cymru发出谴责。2024年11月1日，黑客利用一个存在超过12年的测试账户Test2（密码为Password1）入侵系统，导致3300人（多为儿童）的个人信息泄露。ICO调查负责人David Doodson表示：Password1不是合适的密码，它是对不法分子的敞开大门。该事件暴露了ONL和Data Cymru在系统保护和定期安全检查方面的严重不足。",
+          "url": "https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/",
+          "source_note": "",
+          "industry": "IT服务/公共数据管理",
+          "authority": "英国信息委员会（ICO）",
+          "item_date": "2026-10-20",
+          "legal_basis": "UK GDPR",
+          "amount": ""
+        },
+        {
+          "title": "意大利Garante对IQVIA开出700万欧元罚单",
+          "summary": "2026年9月23日，意大利数据保护局（Garante）对医疗健康数据分析公司IQVIA Solutions Italy作出处罚，处以700万欧元罚款。IQVIA建立了一个涵盖约100万名患者（来自800名全科医生）的健康分析数据库，声称数据已匿名化。但Garante发现，数据库中使用的持久标识符结合出生年份、性别、诊断、处方和位置数据，足以重新识别个人身份。此外，IQVIA缺乏合法基础、患者告知、数据保留期限和影响评估，部分记录甚至可追溯至2001年。",
+          "url": "https://www.garanteprivacy.it",
+          "source_note": "",
+          "industry": "医疗健康数据分析",
+          "authority": "意大利数据保护局（Garante）",
+          "item_date": "2026-09-23",
+          "legal_basis": "GDPR（匿名化认定、合法性基础、数据最小化）",
+          "amount": "€7,000,000"
+        },
+        {
+          "title": "意大利Garante对BBVA开出550.8万欧元罚单",
+          "summary": "2026年7月3日，意大利数据保护局（Garante）对西班牙对外银行（BBVA）意大利分行作出处罚，处以550.8万欧元罚款。一名客户通过APP和客服两次明确选择退出营销，但在随后七个月内持续收到促销通知。BBVA辩称是技术故障导致退出指令未同步至营销发送单元，且认为客户应使用隐私政策中指定的专用邮箱。Garante驳回了这一辩解，认定控制者必须便利权利请求，不能因请求渠道不正确而忽视有效的退出请求。",
+          "url": "https://www.garanteprivacy.it",
+          "source_note": "",
+          "industry": "银行/金融服务",
+          "authority": "意大利数据保护局（Garante）",
+          "item_date": "2026-07-03",
+          "legal_basis": "GDPR（数据主体权利、直接营销退出）",
+          "amount": "€5,508,000"
+        },
+        {
+          "title": "意大利Garante对阿联酋航空开出18万欧元罚单",
+          "summary": "2026年5月14日，意大利数据保护局（Garante）对阿联酋航空（Emirates）作出处罚，处以18万欧元罚款。航空公司通过MEDIF表格收集需要协助乘客的健康数据，Garante认为收集行为本身可能具有合法基础，但航空公司未清楚告知乘客谁需要填写该表格、未说明处理目的、法律依据和保留期限，且七年保留期过长。此案显示Garante将合法性基础与透明度义务分开审查。",
+          "url": "https://www.garanteprivacy.it",
+          "source_note": "",
+          "industry": "航空运输",
+          "authority": "意大利数据保护局（Garante）",
+          "item_date": "2026-05-14",
+          "legal_basis": "GDPR（透明度义务、数据保留）",
+          "amount": "€180,000"
+        }
+      ]
+    },
+    {
+      "key": "north_america",
+      "name": "北美",
+      "items": [
+        {
+          "title": "美国联邦法官最终批准Google 825万美元儿童隐私集体诉讼和解",
+          "summary": "2026年10月23日，美国联邦法官最终批准了Google及其移动广告子公司AdMob支付的825万美元集体诉讼和解金。该案（A.B. v. Google LLC）指控Google和AdMob在2015年4月至诉讼期间，通过Google Play商店应用（包括Family和Children类别应用）未经可验证的家长同意收集13岁以下儿童的个人信息（设备标识符等），涉嫌违反《儿童在线隐私保护法》（COPPA）。Google未承认任何不当行为。",
+          "url": "https://www.mlex.com/mlex/amp/articles/2542076",
+          "source_note": "线索来源：MLex",
+          "industry": "移动应用/应用商店（Google Play）",
+          "authority": "美国联邦法院（北加州联邦地区法院）",
+          "item_date": "2026-10-23",
+          "legal_basis": "COPPA（儿童在线隐私保护法）",
+          "amount": "$8,250,000"
+        },
+        {
+          "title": "美国得克萨斯州起诉OpenAI及Sam Altman，要求新模型须经独立安全审查",
+          "summary": "2026年10月23日，美国得克萨斯州在州法院对OpenAI及其CEO Sam Altman提起诉讼，指控其违反得州《欺骗性贸易行为-消费者保护法》（DTPA）及《通过家长授权保障儿童在线安全法》（SCOPE Act），将ChatGPT开发为危险在线产品且未向消费者警示其风险。得州要求法院禁止OpenAI在未经独立安全评估机构批准的情况下发布新AI模型，并禁止未成年人使用ChatGPT。诉状称OpenAI明知其产品不可靠却仍优先商业增长而非安全。",
+          "url": "https://www.texasattorneygeneral.gov/sites/default/files/images/press/OpenAI%20Final.pdf",
+          "source_note": "线索来源：MLex",
+          "industry": "AI服务（ChatGPT/大语言模型）",
+          "authority": "得克萨斯州法院",
+          "item_date": "2026-10-23",
+          "legal_basis": "得克萨斯州DTPA、SCOPE Act",
+          "amount": ""
+        },
+        {
+          "title": "美国新墨西哥州法院判决Meta支付250亿美元消费者保护罚金",
+          "summary": "2026年10月21日，美国新墨西哥州第一司法区法院法官Francis Mathew判决Meta向该州支付250亿美元罚金。此前在9月，陪审团认定Meta在2016年大选期间因政治咨询公司Cambridge Analytica使用Facebook用户数据生成定向政治广告而违反了新墨西哥州消费者保护法，构成超过4300万次违法。州检察长Raúl Torrez称这是美国历史上针对单一公司的最大州级判决之一。Meta表示将上诉。罚金将纳入该州教育基金。",
+          "url": "https://abcnews.com/Business/meta-ordered-pay-new-mexico-25-billion-violating-consumer-protection-laws/story?id=137454455",
+          "source_note": "",
+          "industry": "社交媒体平台（Facebook/Meta）",
+          "authority": "新墨西哥州第一司法区法院",
+          "item_date": "2026-10-21",
+          "legal_basis": "新墨西哥州消费者保护法（Unfair Practices Act）",
+          "amount": "$25,000,000,000"
+        }
+      ]
+    },
+    {
+      "key": "asia_pacific",
+      "name": "亚太",
+      "items": [
+        {
+          "title": "澳大利亚TGA审查发现12款数字病历抄写工具中8款可能属于医疗器械",
+          "summary": "2026年10月16日，澳大利亚治疗用品管理局（TGA）发布数字病历抄写工具（digital scribes）审查结果，在审查的12款工具中，8款包含的功能可能符合医疗器械定义。TGA同日更新了数字抄写页面，并指出其临床决策支持系统（CDSS）指引正在审查中。对于医疗实践而言，若AI工具不仅记录和转录，还建议诊断或治疗方案，则可能被归类为医疗器械，需符合TGA监管要求。",
+          "url": "https://www.tga.gov.au",
+          "source_note": "",
+          "industry": "医疗健康AI/数字病历工具",
+          "authority": "澳大利亚治疗用品管理局（TGA）",
+          "item_date": "2026-10-16",
+          "legal_basis": "澳大利亚《治疗用品法》",
+          "amount": ""
+        },
+        {
+          "title": "香港PCPD与数字政策办公室联合举办保障个人数据AI沙盒路演",
+          "summary": "2026年10月6日，香港个人资料私隐专员公署（PCPD）与数字政策办公室（DPO）联合举办保障个人数据AI沙盒路演。该沙盒计划为期六个月，旨在为学校提供协作平台以探索和应用AI解决方案。第一阶段将遴选15所公立中小学，免费提供PCPD的个人数据隐私保护监管指引、DPO的香港生成式人工智能技术及应用指引，以及香港数码港和生产力局的技术建议。申请截止日期为2026年10月30日。",
+          "url": "https://www.pcpd.org.hk/english/news_events/media_statements/index.html",
+          "source_note": "",
+          "industry": "教育/AI应用",
+          "authority": "香港个人资料私隐专员公署（PCPD）",
+          "item_date": "2026-10-06",
+          "legal_basis": "香港《个人资料（私隐）条例》",
+          "amount": ""
+        }
+      ]
+    }
+  ]
+}
