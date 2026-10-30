@@ -51,10 +51,9 @@ header p{color:var(--text2);font-size:1rem}
 .article-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:30px;margin-top:20px}
 .article-section h2{font-size:1.3rem;margin-bottom:16px;color:var(--accent)}
 .article-content{font-size:.9rem;color:var(--text2);line-height:1.8;white-space:pre-wrap}
-.article-content h1,.article-content h2,.article-content h3{color:var(--text);margin:16px 0 8px}
-.article-content strong{color:var(--text)}
 .empty-state{text-align:center;padding:60px 20px;color:var(--text2)}
-.empty-state svg{width:64px;height:64px;margin-bottom:16px;opacity:.5}
+.loading{text-align:center;padding:40px;color:var(--text2)}
+.error-box{background:rgba(239,68,68,.1);border:1px solid var(--red);border-radius:10px;padding:20px;margin:20px 0;color:var(--red);font-size:.9rem}
 footer{text-align:center;padding:30px;color:var(--text2);font-size:.8rem;border-top:1px solid var(--border);margin-top:40px}
 @media(max-width:768px){.cards-grid{grid-template-columns:1fr}header h1{font-size:1.5rem}}
 </style>
@@ -66,17 +65,18 @@ footer{text-align:center;padding:30px;color:var(--text2);font-size:.8rem;border-
 <p>每周汇总全球数据保护机构执法、法院判决与AI监管动态</p>
 </header>
 
-<div class="stats" id="stats"></div>
+<div id="loading" class="loading">正在加载数据...</div>
+<div id="errorBox"></div>
 
-<div class="week-selector" id="weekSelector"></div>
-
-<div class="section-filters" id="sectionFilters"></div>
-
-<div class="cards-grid" id="cardsGrid"></div>
-
-<div class="article-section" id="articleSection" style="display:none">
-<h2>本周分析文章</h2>
-<div class="article-content" id="articleContent"></div>
+<div id="dashboard" style="display:none">
+  <div class="stats" id="stats"></div>
+  <div class="week-selector" id="weekSelector"></div>
+  <div class="section-filters" id="sectionFilters"></div>
+  <div class="cards-grid" id="cardsGrid"></div>
+  <div class="article-section" id="articleSection" style="display:none">
+    <h2>本周分析文章</h2>
+    <div class="article-content" id="articleContent"></div>
+  </div>
 </div>
 
 <footer>
@@ -86,13 +86,6 @@ footer{text-align:center;padding:30px;color:var(--text2);font-size:.8rem;border-
 </div>
 
 <script>
-const indexData = {"weeks": [{"date": "2026-10-25", "report": "reports/2026-10-25.json", "article": "articles/2026-10-25.md", "headline": "AI监管风暴周：欧盟GDPR修订引数字征用争议，美国州级执法火力全开——Meta 250亿美元、得州起诉OpenAI、挪威Xandr 860万欧元", "item_count": 15}, {"date": "2026-10-21", "report": "reports/2026-10-21.json", "article": "articles/2026-10-21.md", "headline": "智能眼镜站上监管风口：EDPB 首发声明、OAIC 调查深圳青橙；荷兰 AP 对 Uber 开出 8.25 亿欧元罚单", "item_count": 10}]};
-const allReports = {"2026-10-25": {"date": "2026-10-25", "sections": [{"key": "europe", "name": "欧盟与欧洲", "items": [{"title": "EDPB确定2026年协调执法主题为GDPR透明度义务", "summary": "2026年10月14日，EDPB在全体会议上确定2026年第五次协调执法行动（CEF）的主题为GDPR下的透明度与信息义务（第12、13、14条）。25个成员国数据保护机构将自愿参与，在2026年内对各行业控制者开展执法行动或事实调查，评估其是否以清晰、简洁、易懂的方式向个人说明数据处理活动。调查结果将在下半年汇总分析，形成统一报告。", "url": "https://www.edpb.europa.eu/news/news/2026/cef-2026-edpb-launches-coordinated-enforcement-action-transparency-and-information_de", "source_note": "", "industry": "全行业（网站、APP、SaaS等）", "authority": "EDPB（欧洲数据保护委员会）", "item_date": "2026-10-14", "legal_basis": "GDPR第12、13、14条", "amount": ""}, {"title": "挪威数据保护局对微软Xandr开出860万欧元罚单", "summary": "2026年10月2日，挪威数据保护局（Datatilsynet）对微软旗下广告技术公司Xandr Inc.作出最终处罚决定，处以860万欧元（约9200万挪威克朗）行政罚款，系挪威史上最大数据保护罚单。Xandr被认定在2018年7月至2020年4月期间，未经合法依据处理同性恋社交应用Grindr用户的个人数据（包括广告ID和IP地址），且处理了涉及性取向的特殊类别个人数据，违反GDPR第6条和第9条。挪威消费者委员会于2020年提起投诉。EDPB于10月16日发布该决定摘要。", "url": "https://www.edpb.europa.eu/news/norwegian-dpa-fines-xandr-eur-8-600-000-for-unlawful-processing-of-personal-data_en", "source_note": "线索来源：noyb（noyb于2020年对Xandr提起投诉）", "industry": "在线广告/程序化广告（AdTech）", "authority": "挪威数据保护局（Datatilsynet）", "item_date": "2026-10-02", "legal_basis": "GDPR第6条（合法性基础）、第9条（特殊类别数据）", "amount": "€8,600,000"}, {"title": "欧盟成员国理事会通过GDPR修订为AI公司开辟数据征用通道", "summary": "2026年10月22日，欧盟成员国理事会在德国等大国支持下通过了一项极具争议的GDPR修订提案，拟新增第88bis条。该条款规定，AI公司在AI相关场景中使用个人数据时，可自动推定其拥有压倒性合法利益，无需征得用户同意。这意味着AI公司的商业利益将优先于用户的基本权利，且适用于从未成为AI公司客户的个人、数十年前的数据（如聊天记录、社交媒体内容）。noyb强烈批评此举为数字征用。", "url": "https://noyb.eu/en/ai-eu-member-states-approve-digital-expropriation-europeans-ai-companies", "source_note": "线索来源：noyb", "industry": "AI服务/大模型开发", "authority": "欧盟理事会（EU Council）", "item_date": "2026-10-22", "legal_basis": "GDPR拟议修订（第88bis条）", "amount": ""}, {"title": "柏林数据保护局认定德国主要政党微定向广告违法", "summary": "2026年10月21日，noyb公布柏林数据保护局（Berlin DPA）于2026年9月24日发出的四份结案函。2023年noyb对德国主要政党（CDU、SPD、绿党、左翼党）在2021年联邦大选期间通过Facebook进行政治微定向广告提起投诉。柏林DPA认定这些政党未获得用户同意等合法基础，即基于政治兴趣对选民进行定向投放，违反了GDPR，并对四党发出谴责（reprimand）。noyb律师Felix Mikolasch表示微定向对民主构成威胁。", "url": "https://noyb.eu/en/noyb-win-german-dpa-finds-microtargeting-major-political-parties-illegal", "source_note": "线索来源：noyb", "industry": "社交媒体广告/政治广告", "authority": "柏林数据保护局（Berlin DPA）", "item_date": "2026-09-24", "legal_basis": "GDPR第6条（合法性基础）", "amount": ""}, {"title": "英国ICO完成AI基础模型监管计划并启动AI代理证据征集", "summary": "2026年10月8日，英国信息委员会（ICO于9月30日改制为新法人机构）宣布完成历时约两年的AI基础模型开发者监管计划，从OpenAI、Google、Microsoft、Meta、Amazon、Apple、Anthropic、Cohere、DeepSeek、Stability AI十家公司获得数据保护改进承诺，涉及透明度、用户权利行使机制和安全保障三大领域。同日，ICO启动为期六周的AI代理（agentic AI）证据征集，截止日期为2026年11月20日，聚焦自主AI系统的数据保护风险。xAI/Grok因未配合而转入正式调查。", "url": "https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/", "source_note": "线索来源：MLex", "industry": "AI服务/大模型开发", "authority": "英国信息委员会（ICO）", "item_date": "2026-10-08", "legal_basis": "UK GDPR、Data Protection Act 2018", "amount": ""}, {"title": "英国ICO对伦敦警察厅信息治理失职采取监管行动", "summary": "2026年10月14日，英国信息委员会（ICO）对伦敦警察厅（Metropolitan Police Service）采取监管行动，因其在信息治理方面存在严重缺陷。ICO指出该机构未能妥善保护所处理的个人数据，存在系统性的信息管理漏洞。", "url": "https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/", "source_note": "", "industry": "公共部门/执法机构", "authority": "英国信息委员会（ICO）", "item_date": "2026-10-14", "legal_basis": "UK GDPR", "amount": ""}, {"title": "英国ICO谴责威尔士两机构因弱密码导致3300名儿童数据泄露", "summary": "2026年10月20日，英国信息委员会（ICO）对Ogi Networks Limited（ONL）和Data Cymru发出谴责。2024年11月1日，黑客利用一个存在超过12年的测试账户Test2（密码为Password1）入侵系统，导致3300人（多为儿童）的个人信息泄露。ICO调查负责人David Doodson表示：Password1不是合适的密码，它是对不法分子的敞开大门。该事件暴露了ONL和Data Cymru在系统保护和定期安全检查方面的严重不足。", "url": "https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/", "source_note": "", "industry": "IT服务/公共数据管理", "authority": "英国信息委员会（ICO）", "item_date": "2026-10-20", "legal_basis": "UK GDPR", "amount": ""}, {"title": "意大利Garante对IQVIA开出700万欧元罚单", "summary": "2026年9月23日，意大利数据保护局（Garante）对医疗健康数据分析公司IQVIA Solutions Italy作出处罚，处以700万欧元罚款。IQVIA建立了一个涵盖约100万名患者（来自800名全科医生）的健康分析数据库，声称数据已匿名化。但Garante发现，数据库中使用的持久标识符结合出生年份、性别、诊断、处方和位置数据，足以重新识别个人身份。此外，IQVIA缺乏合法基础、患者告知、数据保留期限和影响评估，部分记录甚至可追溯至2001年。", "url": "https://www.garanteprivacy.it", "source_note": "", "industry": "医疗健康数据分析", "authority": "意大利数据保护局（Garante）", "item_date": "2026-09-23", "legal_basis": "GDPR（匿名化认定、合法性基础、数据最小化）", "amount": "€7,000,000"}, {"title": "意大利Garante对BBVA开出550.8万欧元罚单", "summary": "2026年7月3日，意大利数据保护局（Garante）对西班牙对外银行（BBVA）意大利分行作出处罚，处以550.8万欧元罚款。一名客户通过APP和客服两次明确选择退出营销，但在随后七个月内持续收到促销通知。BBVA辩称是技术故障导致退出指令未同步至营销发送单元，且认为客户应使用隐私政策中指定的专用邮箱。Garante驳回了这一辩解，认定控制者必须便利权利请求，不能因请求渠道不正确而忽视有效的退出请求。", "url": "https://www.garanteprivacy.it", "source_note": "", "industry": "银行/金融服务", "authority": "意大利数据保护局（Garante）", "item_date": "2026-07-03", "legal_basis": "GDPR（数据主体权利、直接营销退出）", "amount": "€5,508,000"}, {"title": "意大利Garante对阿联酋航空开出18万欧元罚单", "summary": "2026年5月14日，意大利数据保护局（Garante）对阿联酋航空（Emirates）作出处罚，处以18万欧元罚款。航空公司通过MEDIF表格收集需要协助乘客的健康数据，Garante认为收集行为本身可能具有合法基础，但航空公司未清楚告知乘客谁需要填写该表格、未说明处理目的、法律依据和保留期限，且七年保留期过长。此案显示Garante将合法性基础与透明度义务分开审查。", "url": "https://www.garanteprivacy.it", "source_note": "", "industry": "航空运输", "authority": "意大利数据保护局（Garante）", "item_date": "2026-05-14", "legal_basis": "GDPR（透明度义务、数据保留）", "amount": "€180,000"}]}, {"key": "north_america", "name": "北美", "items": [{"title": "美国联邦法官最终批准Google 825万美元儿童隐私集体诉讼和解", "summary": "2026年10月23日，美国联邦法官最终批准了Google及其移动广告子公司AdMob支付的825万美元集体诉讼和解金。该案（A.B. v. Google LLC）指控Google和AdMob在2015年4月至诉讼期间，通过Google Play商店应用（包括Family和Children类别应用）未经可验证的家长同意收集13岁以下儿童的个人信息（设备标识符等），涉嫌违反《儿童在线隐私保护法》（COPPA）。Google未承认任何不当行为。", "url": "https://www.mlex.com/mlex/amp/articles/2542076", "source_note": "线索来源：MLex", "industry": "移动应用/应用商店（Google Play）", "authority": "美国联邦法院（北加州联邦地区法院）", "item_date": "2026-10-23", "legal_basis": "COPPA（儿童在线隐私保护法）", "amount": "$8,250,000"}, {"title": "美国得克萨斯州起诉OpenAI及Sam Altman，要求新模型须经独立安全审查", "summary": "2026年10月23日，美国得克萨斯州在州法院对OpenAI及其CEO Sam Altman提起诉讼，指控其违反得州《欺骗性贸易行为-消费者保护法》（DTPA）及《通过家长授权保障儿童在线安全法》（SCOPE Act），将ChatGPT开发为危险在线产品且未向消费者警示其风险。得州要求法院禁止OpenAI在未经独立安全评估机构批准的情况下发布新AI模型，并禁止未成年人使用ChatGPT。诉状称OpenAI明知其产品不可靠却仍优先商业增长而非安全。", "url": "https://www.texasattorneygeneral.gov/sites/default/files/images/press/OpenAI%20Final.pdf", "source_note": "线索来源：MLex", "industry": "AI服务（ChatGPT/大语言模型）", "authority": "得克萨斯州法院", "item_date": "2026-10-23", "legal_basis": "得克萨斯州DTPA、SCOPE Act", "amount": ""}, {"title": "美国新墨西哥州法院判决Meta支付250亿美元消费者保护罚金", "summary": "2026年10月21日，美国新墨西哥州第一司法区法院法官Francis Mathew判决Meta向该州支付250亿美元罚金。此前在9月，陪审团认定Meta在2016年大选期间因政治咨询公司Cambridge Analytica使用Facebook用户数据生成定向政治广告而违反了新墨西哥州消费者保护法，构成超过4300万次违法。州检察长Raúl Torrez称这是美国历史上针对单一公司的最大州级判决之一。Meta表示将上诉。罚金将纳入该州教育基金。", "url": "https://abcnews.com/Business/meta-ordered-pay-new-mexico-25-billion-violating-consumer-protection-laws/story?id=137454455", "source_note": "", "industry": "社交媒体平台（Facebook/Meta）", "authority": "新墨西哥州第一司法区法院", "item_date": "2026-10-21", "legal_basis": "新墨西哥州消费者保护法（Unfair Practices Act）", "amount": "$25,000,000,000"}]}, {"key": "asia_pacific", "name": "亚太", "items": [{"title": "澳大利亚TGA审查发现12款数字病历抄写工具中8款可能属于医疗器械", "summary": "2026年10月16日，澳大利亚治疗用品管理局（TGA）发布数字病历抄写工具（digital scribes）审查结果，在审查的12款工具中，8款包含的功能可能符合医疗器械定义。TGA同日更新了数字抄写页面，并指出其临床决策支持系统（CDSS）指引正在审查中。对于医疗实践而言，若AI工具不仅记录和转录，还建议诊断或治疗方案，则可能被归类为医疗器械，需符合TGA监管要求。", "url": "https://www.tga.gov.au", "source_note": "", "industry": "医疗健康AI/数字病历工具", "authority": "澳大利亚治疗用品管理局（TGA）", "item_date": "2026-10-16", "legal_basis": "澳大利亚《治疗用品法》", "amount": ""}, {"title": "香港PCPD与数字政策办公室联合举办保障个人数据AI沙盒路演", "summary": "2026年10月6日，香港个人资料私隐专员公署（PCPD）与数字政策办公室（DPO）联合举办保障个人数据AI沙盒路演。该沙盒计划为期六个月，旨在为学校提供协作平台以探索和应用AI解决方案。第一阶段将遴选15所公立中小学，免费提供PCPD的个人数据隐私保护监管指引、DPO的香港生成式人工智能技术及应用指引，以及香港数码港和生产力局的技术建议。申请截止日期为2026年10月30日。", "url": "https://www.pcpd.org.hk/english/news_events/media_statements/index.html", "source_note": "", "industry": "教育/AI应用", "authority": "香港个人资料私隐专员公署（PCPD）", "item_date": "2026-10-06", "legal_basis": "香港《个人资料（私隐）条例》", "amount": ""}]}]}, "2026-10-21": {"date": "2026-10-21", "sections": [{"key": "europe", "name": "欧盟与欧洲", "items": [{"title": "EDPB 发布首份智能眼镜声明：制造商不能以「用户告知路人」免责", "summary": "10月13日，欧洲数据保护委员会（EDPB）在全体会议上通过《关于智能眼镜的第1/2026号声明》，这是其首次将配备摄像头的可穿戴设备作为独立高风险品类发声。声明核心立场：智能眼镜制造商与关联 AI 服务商在设备设计阶段即为数据控制者，须依 GDPR 第25条落实「设计与默认的数据保护」—— recording 指示灯（LED、声音提示等）须默认开启且不可被用户永久关闭；拍摄内容若发布至公开社交网络，佩戴者本人将失去「家庭豁免」而成为完整意义上的控制者；涉及人脸/生物识别功能的还须满足第9条特殊类别数据规则。声明同时点名医院、学校、职场等敏感场景需更高审查标准。涉及行业：智能眼镜制造商、AI 服务提供商、消费电子零售。同期还发布了 SPE 专家报告《The connected gaze》。", "url": "https://www.edpb.europa.eu/news/edpb-publishes-statement-on-the-data-protection-challenges-of-smart-glasses_en", "source_note": "EDPB 官网新闻稿", "industry": "智能眼镜、AI 服务、消费电子", "authority": "EDPB", "item_date": "2026-10-13", "legal_basis": "GDPR 第25条、第9条、第2(2)(c)条", "amount": ""}, {"title": "EDPB 确定2026年协同执法行动（CEF）主题：透明度与告知义务", "summary": "10月14日，EDPB 在10月全体会议上选定第五次协同执法行动（CEF）主题为 GDPR 第12、13、14条下的透明度与告知义务——即企业是否以清晰、可及的方式告知个人其数据如何被处理。各成员国监管机构将在未来数周内自愿加入，并于2026年内展开全国性平行检查，结果汇总为欧洲层面的分析。这意味着隐私政策、App 内告知文案、cookie 说明的清晰度将成为明年欧盟执法的统一靶点。涉及行业：全部面向欧盟用户的行业，尤其是 APP 运营商、电商与在线服务。", "url": "https://www.edpb.europa.eu/news_en", "source_note": "EDPB 官网（10月14日新闻稿，见新闻列表）；线索来源：GRC Report", "industry": "全行业（APP 运营商、电商、在线服务）", "authority": "EDPB", "item_date": "2026-10-14", "legal_basis": "GDPR 第12、13、14条", "amount": ""}, {"title": "荷兰监管机构对 Uber 开出 8.25 亿欧元罚单：自动化决策与画像透明度违规", "summary": "据 EDPB 成员国动态汇总（10月8日发布），荷兰数据保护局（AP）对 Uber 处以 824,990,000 欧元罚款，事由为违法的自动化决策及对画像处理的信息告知不足。这是 GDPR 历史上金额最高的罚单之一，直接针对平台用算法对司机进行管理、分配和评估时未充分告知、未保障人工干预权利的问题。涉及行业：网约车/零工经济平台、一切使用算法管理劳动者的平台企业。", "url": "https://www.edpb.europa.eu/news_en", "source_note": "线索来源：EDPB 成员国动态汇总；荷兰 AP 官网原文链接待补", "industry": "网约车平台、零工经济、算法管理", "authority": "荷兰 AP", "item_date": "2026-10-08", "legal_basis": "GDPR（自动化决策与画像告知义务）", "amount": "824,990,000 欧元"}, {"title": "挪威监管机构对微软旗下广告科技公司 Xandr 罚款 860 万欧元（Grindr 案）", "summary": "挪威数据保护局（Datatilsynet）对微软旗下广告科技公司 Xandr 处以 9200 万挪威克朗（约 860 万欧元）罚款，最终决定于10月2日作出，10月中旬公布。该案源于2020年 noyb 与挪威消费者委员会的联合投诉：Xandr 在程序化广告交易中处理并分享了交友应用 Grindr 用户的敏感个人数据，缺乏有效法律依据。监管机构明确表示：广告技术链条中的幕后公司不能以「假设前端 App 已取得同意」为由推卸自身责任。涉及行业：广告科技（AdTech）、APP 运营商。", "url": "https://www.edpb.europa.eu/news_en", "source_note": "线索来源：noyb、EDPB 成员国动态汇总（10月16日列入）", "industry": "广告科技、约会/社交 APP", "authority": "挪威 Datatilsynet", "item_date": "2026-10-12", "legal_basis": "GDPR 第6条、第9条", "amount": "9200 万挪威克朗（约 860 万欧元）"}, {"title": "意大利 Garante 对 IQVIA 罚款 700 万欧元：违法处理患者健康数据", "summary": "据 EDPB 成员国动态汇总（10月9日发布），意大利数据保护局（Garante）对医疗数据与临床研究服务商 IQVIA 处以 700 万欧元罚款，事由为违法处理患者健康数据。健康数据属 GDPR 第9条特殊类别，本案再次表明受托处理医疗数据的 CRO/数据服务商会被作为直接责任主体追责。涉及行业：医疗健康数据、临床研究服务（CRO）、医疗 AI。", "url": "https://www.edpb.europa.eu/news_en", "source_note": "线索来源：EDPB 成员国动态汇总；Garante 官网原文链接待补", "industry": "医疗健康数据、临床研究服务", "authority": "意大利 Garante", "item_date": "2026-10-09", "legal_basis": "GDPR 第9条（特殊类别数据）", "amount": "700 万欧元"}, {"title": "意大利 Garante 对 BBVA 罚款 550.8 万欧元：未尊重客户拒绝直接营销的权利", "summary": "据 EDPB 成员国动态汇总（10月9日发布），意大利 Garante 对西班牙对外银行（BBVA）处以 5,508,000 欧元罚款，事由为未尊重客户针对直接营销的反对权。金融机构依据 GDPR 第21条必须提供便捷、可执行的反对直达渠道，本案显示「反对权落空」本身即构成高额处罚事由。涉及行业：银行、金融服务、电销/直邮营销。", "url": "https://www.edpb.europa.eu/news_en", "source_note": "线索来源：EDPB 成员国动态汇总；Garante 官网原文链接待补", "industry": "银行与金融服务", "authority": "意大利 Garante", "item_date": "2026-10-09", "legal_basis": "GDPR 第21条（反对权）", "amount": "5,508,000 欧元"}, {"title": "CNIL 关闭对 Google 的合规禁令：3.25 亿欧元罚单后的整改获认可", "summary": "10月14日，法国 CNIL 公布其限制合议庭9月23日决定：正式关闭2025年9月1日对 Google LLC 与 Google Ireland 发出的合规禁令。此前 Google 因 cookie 与 Gmail 广告问题被罚 3.25 亿欧元，并被责令六个月内完成两项整改（开户时明确告知广告 cookie 的必然植入；Gmail 邮件间插入的广告须取得同意并显著区分于私人邮件），逾期每日滞纳金 10 万欧元。CNIL 认定 Google 已按期完成整改，故关闭禁令。涉及行业：大型科技平台、广告服务。", "url": "https://www.cnil.fr/en/closure-injunction-google", "source_note": "CNIL 官网", "industry": "科技平台、在线广告", "authority": "法国 CNIL", "item_date": "2026-10-14", "legal_basis": "法国邮政与电子通信法典 L.34-5 条（ePrivacy 转化）", "amount": "原罚款 3.25 亿欧元；滞纳金威胁每日 10 万欧元"}, {"title": "noyb 发布2025年报：全年提起 21 起投诉，正筹备首例集体求偿诉讼", "summary": "10月13日，欧洲数字权利中心 noyb 发布2025年度报告：全年新提起 21 起 GDPR 投诉，在办案件累计 460 起，并正筹备针对征信机构 CRIF 的首例集体救济（collective redress）诉讼；年报同时披露其围绕欧盟《数字综合法案》（Digital Omnibus）对千余项修正案的政策分析。信号意义：隐私 NGO 正从「投诉驱动监管」转向「集体索赔 + 立法游说」双轨，企业面临的私法风险上升。涉及行业：征信、广告科技、平台企业。", "url": "https://ppc.land/noyb-filed-21-gdpr-complaints-in-2025-as-omnibus-fight-limited-resources/", "source_note": "线索来源：noyb（经 PPC Land 报道，10月13日）", "industry": "征信机构、广告科技", "authority": "noyb（欧洲数字权利中心）", "item_date": "2026-10-13", "legal_basis": "GDPR 第80条、欧盟集体救济指令", "amount": ""}]}, {"key": "north_america", "name": "北美", "items": [{"title": "HHS OCR 第56起「访问权」执法：宾州牙科诊所 Shen Smiles 和解支付 14 万美元", "summary": "10月8日，美国卫生与公众服务部民权办公室（HHS OCR）宣布与宾夕法尼亚州牙科机构 Shen Smiles（Linda L. Shen, dba Shen Smiles, P.C.）达成和解：该机构多次拒绝向患者及时提供其受保护健康信息（PHI），并以「员工窃取病历」为由主张无法提供。OCR 认定其缺乏访问权政策、培训及 PHI 安全保障，违反 HIPAA 隐私规则与泄露通知规则，和解金额 14 万美元。这是 OCR 第56起 HIPAA 访问权（Right of Access）执法行动，显示该系列执法仍在持续推进。涉及行业：医疗健康服务机构。", "url": "https://www.linkedin.com/posts/privacy-and-security-brainiacs_notice-of-proposed-determination-dr-linda-activity-7515070006297128960-gOHS", "source_note": "线索来源：Privacy and Security Brainiacs（LinkedIn，含 HHS 决议协议与拟处罚通知链接）；HHS OCR 官网新闻稿链接待补", "industry": "医疗健康服务", "authority": "美国 HHS OCR", "item_date": "2026-10-08", "legal_basis": "HIPAA 隐私规则、泄露通知规则", "amount": "14 万美元"}]}, {"key": "asia_pacific", "name": "亚太", "items": [{"title": "澳大利亚 OAIC 正式调查 HeyCyan 智能眼镜 App 开发商深圳青橙，Kmart 紧急下架相关产品", "summary": "10月7日，澳大利亚信息专员办公室（OAIC）宣布对深圳市青橙未来科技有限公司启动正式调查。HeyCyan 是 Kmart 所售 Anko 智能眼镜及 Big W、Amazon 渠道多款低价智能眼镜的配套 App。OAIC 自8月12日起向 Meta、Google、Kmart 及深圳青橙等发出初步问询，要求说明设备如何记录、谁可访问、数据存储于何处；深圳青橙未作任何回应，隐私专员 Carly Kind 据此启动调查并动用强制取证权，同时致函零售商呼吁评估是否继续销售相关设备。Kmart 随后已将89澳元的 Anko 摄像眼镜从线上渠道下架。涉及行业：智能眼镜、IoT 配套软件、消费电子零售供应链。", "url": "https://www.oaic.gov.au/news/media-centre/oaic-opens-investigation-into-maker-of-heycyan-smart-glasses-phone-app", "source_note": "OAIC 官网新闻稿及专员博客（Smart glasses under the microscope）", "industry": "智能眼镜、IoT 软件、消费电子零售", "authority": "澳大利亚 OAIC", "item_date": "2026-10-07", "legal_basis": "澳大利亚《1988年隐私法》APP 1、第40(2)条", "amount": ""}]}]}};
-const allArticles = {"2026-10-25": "# AI监管风暴周：从欧盟GDPR\"数字征用\"到得州OpenAI诉讼，全球隐私执法进入深水区\n\n**（基于 2026年10月19日至10月25日 全球监管动态周报的分析）**\n\n本周全球数据隐私与AI监管呈现出前所未有的紧张态势。一边是欧盟成员国理事会试图通过GDPR修订为AI公司开辟\"合法利益\"快车道，引发noyb等公民权利组织强烈反弹；另一边是美国州级执法火力全开——得克萨斯州将OpenAI告上法庭要求独立安全审查前置，新墨西哥州则对Meta开出250亿美元天价罚单。与此同时，英国ICO完成长达两年的AI基础模型监管计划并转向AI代理治理，意大利Garante连续开出巨额罚单，挪威Datatilsynet对AdTech巨头Xandr的860万欧元处罚成为该国史上最大数据保护罚单。本周的动态表明：AI不再是监管的\"灰色地带\"，而是全球执法的核心战场；而传统的数据保护执法（透明度、安全基础、儿童隐私）也在同步加速，形成对科技行业的双线夹击。\n\n## 一、行业与产品影响：谁在被重塑\n\n### 1. AI大模型开发者：从\"自我监管\"到\"强制审查\"\n\n本周对AI行业影响最深远的三个事件形成了监管合围。首先，欧盟成员国理事会于10月22日通过的GDPR修订提案（拟新增第88bis条）试图赋予AI公司在\"AI相关场景\"中自动推定\"压倒性合法利益\"的权利，这意味着OpenAI、Google DeepMind、Anthropic等公司的模型训练可以绕过用户同意，直接使用包括聊天记录、社交媒体内容在内的历史个人数据。虽然该修订尚未最终生效，但立法方向已经明确：AI公司的商业利益正在与欧洲人的基本权利发生正面冲突。\n\n其次，英国ICO于10月8日宣布完成针对十家基础模型开发商（OpenAI、Google、Microsoft、Meta、Amazon、Apple、Anthropic、Cohere、DeepSeek、Stability AI）的两年监管计划，获得了透明度、用户权利和安全保障三方面的改进承诺。更关键的是，ICO同日启动了对AI代理（agentic AI）的证据征集，截止日期11月20日。这意味着英国监管框架正从\"训练数据合规\"快速推进到\"自主AI系统治理\"——对于正在部署AI Agent的SaaS公司、自动化客服平台和智能办公工具厂商而言，新的合规要求即将到来。\n\n第三，美国得克萨斯州于10月23日起诉OpenAI及其CEO Sam Altman，依据得州《欺骗性贸易行为-消费者保护法》和《SCOPE Act》，指控ChatGPT是\"危险产品\"，要求法院禁止OpenAI在未经独立安全评估的情况下发布新模型，并禁止未成年人使用。这是美国首次有州政府试图通过法院命令对AI模型发布实施前置审查，其影响远超一般的消费者保护诉讼——如果得州胜诉，其他州可能迅速跟进，形成事实上的\"州级AI准入许可\"制度。\n\n### 2. 在线广告与AdTech：特殊类别数据成为高危区\n\n挪威Datatilsynet对微软旗下Xandr的860万欧元罚单（10月2日决定，EDPB 10月16日发布摘要）是本周AdTech领域最沉重的打击。Xandr被认定在2018-2020年间未经合法基础处理Grindr用户的广告ID和IP地址，且涉及性取向这一特殊类别个人数据。此案的特殊意义在于：它确认了约会/社交应用的用户数据在AdTech生态中的流转受到GDPR第9条的严格限制，而\"广告ID\"这种看似去标识化的技术标识符仍可能构成个人数据。对于依赖第三方数据定向的广告技术平台、DSP和SSP而言，此案意味着必须重新审视数据供应链中的合法性基础链条。\n\n与此同时，意大利Garante对BBVA的550.8万欧元罚单则揭示了另一个常见陷阱：客户通过APP和客服渠道明确选择退出营销后，由于系统间同步故障，营销通知持续发送了七个月。Garante明确驳回了\"技术故障\"和\"应使用指定邮箱\"的抗辩理由，认定控制者必须确保权利请求在所有系统中有效执行。这对拥有多渠道客户触点的电商、银行和SaaS公司敲响了警钟——营销退出机制不能停留在前端界面，必须打通CRM、邮件系统、推送服务和客服平台。\n\n### 3. 社交媒体平台：州级消费者保护成为新杠杆\n\nMeta在新墨西哥州遭遇的250亿美元判决（10月21日）是本周金额最大的单一执法行动。虽然该案根源是2016年Cambridge Analytica事件，但判决逻辑对当前所有社交媒体平台具有警示意义：新墨西哥州法院将Meta关于用户数据处理、仇恨言论政策和虚假信息控制的29项公开声明中的26项认定为误导性陈述，构成超过4300万次消费者保护法违规。这意味着平台在隐私政策、透明度报告和安全承诺中的每一句话都可能成为未来诉讼的弹药。对于正在快速迭代AI功能（如AI生成内容、智能推荐）的社交平台而言，产品描述与实际操作之间的任何偏差都可能被放大为系统性违规。\n\n### 4. 医疗健康数据：匿名化声明面临严格审查\n\n意大利Garante对IQVIA的700万欧元罚单（9月23日决定）是本周医疗健康领域最重要的执法信号。IQVIA建立了一个涵盖约100万名患者的数据库，声称数据已匿名化，但Garante发现持久标识符结合出生年份、性别、诊断、处方和位置数据足以重新识别个人。更关键的是，部分记录可追溯至2001年，且对3300名患者包含了姓名、税号、地址等直接标识符。此案传递的明确信号是：\"匿名化\"不是自我声明的标签，而是需要技术验证和监管认可的结论；持久标识符、详细准标识符和长期保留期的组合足以推翻匿名化主张。对于医疗健康AI公司、数字病历抄写工具厂商（如本周澳大利亚TGA审查的12款产品）和医学研究数据平台而言，这意味着匿名化评估必须纳入DPIA的核心环节，且不能仅依赖内部技术团队的判断。\n\n### 5. 公共部门与基础设施：基础安全仍是最大软肋\n\n英国ICO对威尔士Ogi Networks和Data Cymru的谴责（10月20日）暴露了公共数据管理中最基础也最致命的安全漏洞：一个存在超过12年的测试账户\"Test2\"，密码为\"Password1\"，被黑客利用入侵系统，导致3300名儿童（多为儿童）的个人信息泄露。ICO调查负责人David Doodson的评语——\"Password1不是合适的密码，它是对不法分子的敞开大门\"——虽然听起来像是基础安全培训的常识，但恰恰说明这些常识在大量组织中仍未落实。对于学校、医院、地方政府和任何处理儿童数据的机构而言，此案表明：弱密码、未清理的测试账户和缺失的定期安全审计仍然是数据泄露的首要原因，且监管机构对此类基础失误的容忍度正在快速降低。\n\n## 二、不合规的代价：本周实例警示\n\n本周的监管动态为各行业提供了清晰的\"违规成本计算器\"：\n\n**巨额罚款：** Meta在新墨西哥州面临250亿美元判决（虽然可能上诉，但15%的年利息将持续累积）；挪威Xandr被罚860万欧元；意大利IQVIA 700万欧元、BBVA 550.8万欧元。这些数字的共同点是：它们不再是\"可接受的合规成本\"，而是足以影响公司财务表现和投资者信心的重大事件。特别是Meta的250亿美元判决，即使上诉后大幅削减，其法律费用、声誉损失和管理层注意力分散的成本也难以估量。\n\n**集体诉讼和解：** Google和AdMob的825万美元COPPA集体诉讼和解（10月23日最终批准）虽然金额相对较小，但代表了儿童隐私领域的系统性风险。该案覆盖2015年以来所有使用Google Play Family/Children类别应用的13岁以下美国儿童，意味着任何面向儿童的应用开发者都必须确保广告SDK（如AdMob）的集成符合COPPA的可验证家长同意要求。\n\n**业务限制风险：** 得州对OpenAI的诉讼如果胜诉，将开创美国州级法院对AI模型发布实施前置安全审查的先例。这不仅影响OpenAI，也为所有计划在美国市场发布新模型的AI公司设置了潜在的监管门槛。与此同时，英国ICO将xAI/Grok转入正式调查，表明不配合监管承诺的后果是更严厉的执法程序。\n\n**声誉与信任损失：** 德国主要政党（CDU、SPD、绿党、左翼党）因Facebook政治微定向被柏林DPA认定违法并受到谴责，虽然未处以罚款，但政治声誉损害难以量化。在选举周期中，\"违反GDPR\"的标签对政党的公信力打击可能远超罚款本身。\n\n## 三、合规行动路线图\n\n基于本周监管动态，企业应按以下时间线推进合规工作：\n\n### 立即（0-30天）\n\n1. **审计测试账户和默认密码：** 立即扫描所有系统（包括生产环境、测试环境、备份系统和第三方SaaS工具）中的测试账户、默认账户和共享账户，强制实施密码复杂度策略（至少12位，包含大小写字母、数字和符号），并启用多因素认证（MFA）。参照威尔士Password1事件，将此类审计纳入月度安全检查清单。\n\n2. **核查营销退出机制的全链路同步：** 对于拥有APP、网站、邮件、短信、客服电话等多渠道触点的企业，立即测试用户选择退出营销后的数据流转：前端提交退出请求后，CRM系统、邮件营销平台（如Mailchimp、SendGrid）、推送服务（如Firebase、OneSignal）和客服知识库是否在24小时内同步更新。BBVA案表明，\"技术故障\"不是有效抗辩。\n\n3. **审查AI产品的公开声明：** 法务和产品团队应联合审查公司网站、应用商店页面、隐私政策、透明度报告和新闻稿中关于AI功能的所有公开声明，确保每一句话都有产品实现支撑。参照Meta新墨西哥州案的\" misleading statements\"逻辑，建立\"声明-实现\"对照表。\n\n4. **评估GDPR第88bis条修订对业务的影响：** 对于在欧盟运营或处理欧盟居民数据的AI公司，立即评估如果第88bis条通过，当前训练数据使用的合法性基础是否需要调整。同时准备替代方案（如增强同意机制、数据最小化策略），不要依赖尚未生效的\"合法利益\"豁免。\n\n### 短期（1-3个月）\n\n1. **建立匿名化技术验证流程：** 对于声称数据已匿名化的医疗健康、金融和位置数据产品，引入独立的统计重识别风险评估（如k-匿名、l-多样性、差分隐私测试），并将评估报告纳入DPIA。参照IQVIA案，持久标识符+详细准标识符的组合足以推翻匿名化主张。\n\n2. **完成AdTech数据供应链审计：** 对于使用程序化广告、数据管理平台（DMP）或第三方受众数据的企业，审计整个数据供应链中的合法性基础：上游数据提供者是否有有效同意？数据类别是否包含特殊类别数据？下游合作伙伴的使用范围是否超出原始授权？Xandr案表明，AdTech生态中的任何一环都可能成为执法突破口。\n\n3. **部署AI代理的数据保护风险评估：** 对于正在开发或部署AI代理（agentic AI）的企业，参照ICO证据征集的七个领域（安全、透明度、问责、自动化决策、公平与非歧视、数据使用的合法基础、治理与保障），开展内部风险评估，并在11月20日前考虑向ICO提交意见以影响最终指引。\n\n4. **更新儿童隐私合规框架：** 对于面向13岁以下用户或可能收集儿童数据的产品，审查COPPA合规性：是否实施了可验证的家长同意（VPC）机制？广告SDK（特别是AdMob、Meta Audience Network）的集成是否配置了COPPA限制标志？数据收集范围是否最小化？Google 825万美元和解案表明，\"Designed for Families\"标签下的应用同样受到严格审查。\n\n### 中期（3-6个月）\n\n1. **准备EDPB 2026 CEF透明度执法：** EDPB已将2026年协调执法主题确定为GDPR第12-14条的透明度义务。企业应全面审查隐私政策、Cookie横幅、数据收集通知和第三方共享披露，确保满足\"简洁、透明、易懂\"（concise, transparent, intelligible）的标准。特别关注AI训练数据使用的披露——如果隐私政策中未明确说明个人数据可能用于AI模型训练，现在就是补充披露的时机。\n\n2. **建立政治广告合规审查机制：** 对于在政治敏感市场（如德国、美国选举周期）运营的广告平台或投放政治广告的广告主，建立专门的合规审查流程：是否获得了基于政治观点定向的明确同意？是否遵守了欧盟《政治广告透明度条例》（TTPA）和各国本土要求？德国政党微定向案表明，即使是政治实体也不能豁免GDPR。\n\n3. **实施数据保留期限自动化管理：** IQVIA案中部分记录保留至2001年的问题揭示了手动数据保留管理的系统性风险。企业应在数据仓库、CRM和备份系统中实施自动化的数据保留策略，设置基于数据类别和用途的过期提醒和自动删除机制。\n\n4. **建立跨州法律监控体系：** 对于在美国多州运营的企业，建立州级消费者保护法和隐私法的监控机制。新墨西哥州对Meta的250亿美元判决和得州对OpenAI的诉讼表明，州级执法正在成为与联邦FTC并行的重要监管力量，且各州法律差异巨大（如新墨西哥州的按次违规计算机制）。\n\n### 长期（6个月以上）\n\n1. **构建AI治理的\"设计隐私\"框架：** 将数据保护影响评估（DPIA）从合规文档转变为产品设计流程的核心环节。对于AI产品，在模型设计阶段就纳入数据最小化、目的限制和透明度要求，而非在上线后补救。参照ICO对十家基础模型开发商的监管经验，建立从训练数据采购到模型部署的全生命周期隐私治理框架。\n\n2. **投资隐私增强技术（PETs）：** 对于必须处理敏感数据（健康数据、生物识别数据、儿童数据）的AI应用，投资联邦学习、差分隐私、同态加密和可信执行环境等隐私增强技术，从根本上降低数据泄露和违规处理的风险。\n\n3. **建立全球监管情报与响应体系：** 鉴于本周同时出现了欧盟立法动态、英国监管计划、美国州级诉讼和亚太监管审查，企业需要建立覆盖主要司法管辖区的监管情报体系，确保能够及时识别和响应跨司法管辖区的合规要求变化。建议设立专职的\"全球隐私监管响应\"团队或外包给专业服务机构。\n\n4. **推动行业自律与标准制定：** 积极参与EDPB、ICO、IAPP等机构的咨询和标准化进程，通过行业组织影响监管方向。本周ICO的AI代理证据征集就是一个典型的参与窗口——企业在11月20日前提交的技术意见可能直接影响未来六个月的英国AI监管框架。\n\n## 结语\n\n2026年10月的第四周标志着全球数据隐私监管进入了一个新阶段：AI不再是监管的例外，而是监管的焦点；州级执法不再是联邦执法的配角，而是能够开出250亿美元天价罚单的主角；基础安全失误（如Password1）仍然是最常见的泄露原因，但监管容忍度已经降至冰点。对于企业而言，合规不再是法务部门的孤立工作，而是需要产品、工程、安全和业务团队协同参与的系统性工程。本周的动态清晰地传递了一个信号：在AI和数据隐私的交叉路口，没有\"灰色地带\"，只有\"合规\"或\"代价\"。\n", "2026-10-21": "# 智能眼镜站上监管风口：从 EDPB 首份声明到 8.25 亿欧元 Uber 罚单，本周隐私执法的三个信号\n\n**（基于 2026-10-08 至 2026-10-21 全球监管动态周报的分析）**\n\n本周全球数据隐私监管呈现出一个高度聚焦的画面：一边是 EDPB 与澳大利亚 OAIC 几乎同时把「智能眼镜」推上监管议程，另一边是荷兰 AP 对 Uber 开出 GDPR 历史上罕见的 8.25 亿欧元罚单。两条线索背后指向同一个监管逻辑——**数据处理的责任正沿供应链和算法链条向上游、向设计端转移**。以下从行业影响、不合规后果与合规步骤三个维度展开。\n\n## 一、对行业与产品的影响\n\n### 智能眼镜与可穿戴设备：从「消费者注意」升级为「制造商负责」\n\nEDPB 第 1/2026 号声明（10 月 13 日通过）首次把配备摄像头的眼镜类设备作为独立品类规范，其核心立场对产品设计有直接影响：\n\n- **制造商是控制者**。EDPB 明确，制造商在设备设计阶段即构成 GDPR 意义上的数据控制者，不能以「已提醒佩戴者告知路人」来转移义务。recording 指示灯（LED、声音提示）必须默认开启、不可被永久关闭，且被遮挡时摄像头应停止工作。这直接改变了硬件的工业设计约束。\n- **家庭豁免被压缩**。佩戴者把拍摄内容发到公开社交网络时，即失去 GDPR 第 2(2)(c) 条的家庭豁免，成为完整的控制者。配套 App 若提供一键分享能力，产品侧需要重新评估默认分享路径。\n- **AI 功能叠加更高义务**。具备人脸识别、实时物体识别能力的产品触及 GDPR 第 9 条特殊类别数据规则，需要独立的合法性基础。\n\n几乎同一时间，澳大利亚 OAIC 对 HeyCyan 配套 App 开发商深圳青橙启动正式调查（10 月 7 日），并把问询范围覆盖 Meta、Google、Kmart 等硬件与零售环节，Kmart 已将 89 澳元的 Anko 摄像眼镜从线上下架。**这意味着风险不再只落在品牌方：App 开发商、ODM 厂商、零售商均被纳入责任链**。对出口欧美澳市场的中国硬件与 IoT 软件企业，这是本周最需要逐字研读的两份文件。\n\n### 平台与算法管理：Uber 罚单的辐射面\n\n荷兰 AP 对 Uber 的 8.25 亿欧元罚款（10 月 8 日，经 EDPB 成员国动态披露）针对的是自动化决策与画像告知不足。其影响远超网约车：任何用算法对劳动者或用户进行分配、评分、定价的平台——外卖、货运、灵活用工、内容推荐——都应把本案视为算法透明义务的基准案例。EDPB 同日宣布 2026 年协同执法行动（CEF）聚焦 GDPR 第 12–14 条透明度义务，意味着**隐私政策与告知文案的清晰度将成为明年欧盟各国监管机构的统一检查项**。\n\n### 广告科技与健康数据：存量风险持续兑现\n\n挪威对微软旗下 Xandr 的 860 万欧元罚款确认了一个原则：广告技术链条中的幕后公司不能以「假设前端 App 已取得同意」免责。意大利 Garante 对 IQVIA 的 700 万欧元罚款则提醒所有受托处理患者数据的 CRO 与医疗数据服务商：健康数据链条上的处理者会被作为直接责任主体追责。美国 HHS OCR 的第 56 起 HIPAA 访问权和解（Shen Smiles，14 万美元）显示，即便「员工偷走病历」也不能成为拒绝患者查阅的理由。\n\n## 二、不合规的后果：本周的五笔账\n\n| 主体 | 监管机构 | 金额/后果 | 事由 |\n|---|---|---|---|\n| Uber | 荷兰 AP | 8.25 亿欧元罚款 | 自动化决策与画像告知不足 |\n| Xandr（微软） | 挪威 Datatilsynet | 9200 万挪威克朗（约 860 万欧元） | 无合法依据处理 Grindr 用户敏感数据 |\n| IQVIA | 意大利 Garante | 700 万欧元 | 违法处理患者健康数据 |\n| BBVA | 意大利 Garante | 550.8 万欧元 | 未尊重客户拒绝直接营销的反对权 |\n| Google | 法国 CNIL | 原罚 3.25 亿欧元 + 每日 10 万欧元滞纳金威胁（本周整改获认可、禁令关闭） | cookie 告知与 Gmail 广告同意 |\n| 深圳青橙 | 澳大利亚 OAIC | 正式调查 + 强制取证；零售端下架 | 智能眼镜 App 隐私实践 |\n\n三个值得注意的结构性后果：\n\n1. **金额之外的「市场准入型」后果正在常态化**。Kmart 下架、OAIC 致函全体零售商——监管压力通过零售渠道直接传导为销售损失，比罚款到账更快。\n2. **「不回应监管问询」本身成为升级事由**。OAIC 明确把深圳青橙的沉默列为启动正式调查、动用强制取证权的理由。跨境企业「不回复就没事」的时代已经结束。\n3. **私法风险抬头**。noyb 年报显示其正筹备针对征信机构 CRIF 的首例集体求偿诉讼；监管罚单之外，集体诉讼将成为第二战场。\n\n## 三、下一步合规步骤（Timeline）\n\n### 立即（0–30 天）\n\n- **智能眼镜/可穿戴企业**：对照 EDPB 声明逐项核查——recording 指示灯是否默认开启、可否被关闭、被遮挡时是否停止采集；配套 App 的分享路径与权限设计；梳理「设备如何记录、谁可访问、数据存于何处」三问的标准答案，以备监管问询（OAIC 的问询模板即此三问）。\n- **所有企业**：检查监管来信响应流程，确保任何司法辖区的监管问询在时限内有专人应答。\n- **平台企业**：盘点涉及自动化决策与画像的场景（派单、评分、定价、内容审核），标注告知文案的落点。\n\n### 短期（1–3 个月）\n\n- **透明度整改**：EDPB 已把 GDPR 第 12–14 条定为 2026 年 CEF 主题，各国 DPA 数周内加入。优先重写隐私政策与 App 内分层告知，确保普通用户可读；10 月 30 日前还可就 EDPB《匿名化指南》与《生成式 AI 网络抓取指南》提交意见。\n- **广告科技链条**：重新核验程序化交易中各环节同意的传递与记录，明确自身独立的合法性基础，而非依赖前端 App。\n- **澳大利亚市场**：12 月 10 日起 APP 1.7 生效，隐私政策须披露自动化决策的使用情况；同日儿童在线隐私准则（Children's Online Privacy Code）生效。在售智能设备企业应参照 OAIC 立场完成隐私影响评估。\n\n### 中期（3–6 个月）\n\n- **加州合规包**：2027 年 1 月 1 日 ADMT（自动化决策技术）规则适用、AB 566 要求浏览器提供退出偏好信号、SB 923 扩大删除权；数据经纪商须在 DROP 平台完成首个完整处理周期（CalPrivacy 预期 2026 年 11 月）。\n- **算法管理审计**：参照 Uber 案建立自动化决策的人工干预通道与告知机制，并留存记录。\n\n### 长期（6 个月以上）\n\n- **欧盟程序法变革**：GDPR 程序性条例预计 2027 年 4 月适用，跨境案件的程序节奏与抗辩策略需要提前适配；《数字综合法案》（Digital Omnibus）对 GDPR 的修订值得持续跟踪。\n- **韩国市场**：PIPA 修正案已生效（重复/严重违法罚款上限升至营业额 10%、CEO 为最终责任人），主要企业 ISMS-P 强制认证自 2027 年 7 月起施行。\n- **组织层面**：把「监管问询响应」「集体诉讼预案」纳入常设合规体系——noyb 转向集体求偿意味着数据保护争议的对手方正在多元化。\n\n## 结语\n\n本周的动态勾勒出一个清晰趋势：监管的焦点正从「文本合规」（有没有隐私政策）转向「设计与供应链合规」（产品如何被设计、数据在链条中如何流动）。对企业而言，合规的单元不再是法律部门的文件，而是产品本身。\n"};
-
-let currentWeek = indexData.weeks[0].date;
-let currentFilter = 'all';
-
 const sectionColors = {
   europe: '#3b82f6', north_america: '#ef4444', asia_pacific: '#22c55e',
   middle_east: '#f59e0b', south_america: '#8b5cf6', africa: '#ec4899', court: '#06b6d4'
@@ -102,30 +95,61 @@ const sectionNames = {
   middle_east: '中东', south_america: '南美洲', africa: '非洲', court: '法院判决'
 };
 
+let currentWeek = '';
+let currentFilter = 'all';
+let indexData = null;
+let allReports = {};
+
+async function loadData() {
+  try {
+    // Load index
+    const idxResp = await fetch('data/index.json');
+    if (!idxResp.ok) throw new Error('Failed to load index.json: ' + idxResp.status);
+    indexData = await idxResp.json();
+
+    // Load all reports
+    for (const week of indexData.weeks) {
+      const rResp = await fetch('data/' + week.report);
+      if (rResp.ok) {
+        allReports[week.date] = await rResp.json();
+      }
+    }
+
+    currentWeek = indexData.weeks[0].date;
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    renderAll();
+  } catch (err) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('errorBox').innerHTML = '<div class="error-box">加载数据失败: ' + err.message + '<br>请检查控制台获取详细信息。</div>';
+    console.error(err);
+  }
+}
+
 function renderStats() {
   const report = allReports[currentWeek];
+  if (!report) return;
   const totalItems = report.sections.reduce((s,sec)=>s+sec.items.length,0);
   const totalFines = report.sections.flatMap(s=>s.items).filter(i=>i.amount).length;
   const sections = report.sections.length;
-  const html = `
+  document.getElementById('stats').innerHTML = `
     <div class="stat-card"><div class="num">${totalItems}</div><div class="label">监管动态</div></div>
     <div class="stat-card"><div class="num">${sections}</div><div class="label">覆盖地区</div></div>
     <div class="stat-card"><div class="num">${totalFines}</div><div class="label">含金额处罚</div></div>
     <div class="stat-card"><div class="num">${indexData.weeks.length}</div><div class="label">历史周报</div></div>
   `;
-  document.getElementById('stats').innerHTML = html;
 }
 
 function renderWeekSelector() {
-  const html = indexData.weeks.map(w => {
+  document.getElementById('weekSelector').innerHTML = indexData.weeks.map(w => {
     const active = w.date === currentWeek ? 'active' : '';
     return `<button class="week-btn ${active}" onclick="switchWeek('${w.date}')">${w.date}</button>`;
   }).join('');
-  document.getElementById('weekSelector').innerHTML = html;
 }
 
 function renderFilters() {
   const report = allReports[currentWeek];
+  if (!report) return;
   let html = `<button class="filter-btn ${currentFilter==='all'?'active':''}" onclick="setFilter('all')">全部</button>`;
   report.sections.forEach(sec => {
     const active = currentFilter === sec.key ? 'active' : '';
@@ -136,6 +160,7 @@ function renderFilters() {
 
 function renderCards() {
   const report = allReports[currentWeek];
+  if (!report) return;
   let items = [];
   if (currentFilter === 'all') {
     report.sections.forEach(sec => sec.items.forEach(item => items.push({...item, sectionKey: sec.key, sectionName: sec.name})));
@@ -149,56 +174,63 @@ function renderCards() {
     return;
   }
 
-  const html = items.map((item, idx) => {
+  document.getElementById('cardsGrid').innerHTML = items.map(item => {
     const amount = item.amount ? `<div class="card-amount">${item.amount}</div>` : '';
     const url = item.url ? `<a class="card-url" href="${item.url}" target="_blank">查看原文 →</a>` : '';
     const source = item.source_note ? `<span>${item.source_note}</span>` : '';
     return `
-      <div class="card ${item.sectionKey}" onclick="toggleCard(this)">
+      <div class="card ${item.sectionKey}" onclick="this.classList.toggle('expanded')">
         <div class="card-header">
-          <div class="card-title">${item.title}</div>
+          <div class="card-title">${escapeHtml(item.title)}</div>
           <span class="card-badge" style="background:${sectionColors[item.sectionKey]}22;color:${sectionColors[item.sectionKey]}">${item.sectionName}</span>
         </div>
-        <div class="card-summary">${item.summary}</div>
+        <div class="card-summary">${escapeHtml(item.summary)}</div>
         <div class="card-meta">
-          <span>${item.authority}</span>
+          <span>${escapeHtml(item.authority)}</span>
           <span>${item.item_date || '日期待定'}</span>
-          <span>${item.industry}</span>
+          <span>${escapeHtml(item.industry)}</span>
           ${source}
         </div>
         ${amount}
         <div class="card-detail">
-          <p><strong>法律依据：</strong>${item.legal_basis || '未注明'}</p>
-          <p><strong>涉及行业：</strong>${item.industry}</p>
-          <p><strong>监管机构：</strong>${item.authority}</p>
+          <p><strong>法律依据：</strong>${escapeHtml(item.legal_basis || '未注明')}</p>
+          <p><strong>涉及行业：</strong>${escapeHtml(item.industry)}</p>
+          <p><strong>监管机构：</strong>${escapeHtml(item.authority)}</p>
           ${url}
         </div>
       </div>
     `;
   }).join('');
-  document.getElementById('cardsGrid').innerHTML = html;
 }
 
-function renderArticle() {
-  const article = allArticles[currentWeek];
-  if (article) {
+async function renderArticle() {
+  const week = indexData.weeks.find(w => w.date === currentWeek);
+  if (!week) return;
+  try {
+    const resp = await fetch('data/' + week.article);
+    if (!resp.ok) {
+      document.getElementById('articleSection').style.display = 'none';
+      return;
+    }
+    const text = await resp.text();
     document.getElementById('articleSection').style.display = 'block';
-    // Simple markdown-like rendering
-    let html = article
+    let html = escapeHtml(text)
       .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-      .replace(/^## (.*$)/gm, '<h2>$2</h2>')
-      .replace(/^### (.*$)/gm, '<h3>$3</h3>')
+      .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+      .replace(/^### (.*$)/gm, '<h3>$1</h3>')
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/
-/g, '<br>');
+      .replace(/\n/g, '<br>');
     document.getElementById('articleContent').innerHTML = html;
-  } else {
+  } catch (e) {
     document.getElementById('articleSection').style.display = 'none';
   }
 }
 
-function toggleCard(card) {
-  card.classList.toggle('expanded');
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 function switchWeek(date) {
@@ -221,7 +253,8 @@ function renderAll() {
   document.getElementById('footerDate').textContent = '最新更新：' + currentWeek;
 }
 
-renderAll();
+// Start loading
+loadData();
 </script>
 </body>
 </html>
