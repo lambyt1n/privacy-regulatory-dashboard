@@ -203,53 +203,69 @@ function renderCards() {
   }).join('');
 }
 
-function renderMarkdownTables(text) {
+function escapeHtml(text) {
+  if (!text) return "";
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function renderMarkdown(text) {
   const lines = text.split("\n");
   let result = [];
   let inTable = false;
-  let tableHtml = "";
-  let isFirstRow = true;
+  let tableRows = [];
+  let isFirstTableRow = true;
+
+  function flushTable() {
+    if (tableRows.length === 0) return;
+    let html = '<table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;color:var(--text2)">';
+    for (let r = 0; r < tableRows.length; r++) {
+      const cells = tableRows[r];
+      const tag = r === 0 ? "th" : "td";
+      const style = r === 0
+        ? 'style="border:1px solid var(--border);padding:8px 12px;background:rgba(59,130,246,.08);font-weight:600;text-align:left;color:var(--text)"'
+        : 'style="border:1px solid var(--border);padding:8px 12px"';
+      html += "<tr>" + cells.map(c => "<" + tag + " " + style + ">" + escapeHtml(c) + "</" + tag + ">").join("") + "</tr>";
+    }
+    html += "</table>";
+    result.push(html);
+    tableRows = [];
+    isFirstTableRow = true;
+  }
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
 
+    // Table row detection
     if (line.startsWith("|") && line.endsWith("|")) {
-      if (!inTable) {
-        inTable = true;
-        isFirstRow = true;
-        tableHtml = '<table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;color:var(--text2)">';
-      }
       const cells = line.split("|").slice(1, -1).map(c => c.trim());
-
-      // Skip separator lines like |---|---|---|
+      // Skip separator line
       if (cells.every(c => /^[-:\s]+$/.test(c))) {
         continue;
       }
-
-      const tag = isFirstRow ? "th" : "td";
-      const cellStyle = isFirstRow
-        ? 'style="border:1px solid var(--border);padding:8px 12px;background:rgba(59,130,246,.08);font-weight:600;text-align:left;color:var(--text)"'
-        : 'style="border:1px solid var(--border);padding:8px 12px"';
-      const row = "<tr>" + cells.map(c => "<" + tag + " " + cellStyle + ">" + escapeHtml(c) + "</" + tag + ">").join("") + "</tr>";
-      tableHtml += row;
-      isFirstRow = false;
+      tableRows.push(cells);
+      inTable = true;
     } else {
       if (inTable) {
-        tableHtml += "</table>";
-        result.push(tableHtml);
+        flushTable();
         inTable = false;
-        tableHtml = "";
       }
-      result.push(line);
+      // Process non-table line for markdown
+      let processed = escapeHtml(line)
+        .replace(/^# (.*)$/, "<h1>$1</h1>")
+        .replace(/^## (.*)$/, "<h2>$1</h2>")
+        .replace(/^### (.*)$/, "<h3>$1</h3>")
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+      result.push(processed);
     }
   }
 
   if (inTable) {
-    tableHtml += "</table>";
-    result.push(tableHtml);
+    flushTable();
   }
 
-  return result.join("\n");
+  return result.join("<br>");
 }
 
 async function renderArticle() {
@@ -263,33 +279,12 @@ async function renderArticle() {
     }
     const text = await resp.text();
     document.getElementById("articleSection").style.display = "block";
-
-    // Process tables first (before escapeHtml)
-    let html = renderMarkdownTables(text);
-
-    // Then escape and process other markdown
-    html = escapeHtml(html)
-      .replace(/^# (.*$)/gm, "<h1>$1</h1>")
-      .replace(/^## (.*$)/gm, "<h2>$1</h2>")
-      .replace(/^### (.*$)/gm, "<h3>$1</h3>")
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\n/g, "<br>");
-
-    // Restore HTML table tags that were escaped
-    html = html.replace(/&lt;table/g, "<table")
-               .replace(/&lt;\/table&gt;/g, "</table>")
-               .replace(/&lt;tr&gt;/g, "<tr>")
-               .replace(/&lt;\/tr&gt;/g, "</tr>")
-               .replace(/&lt;th /g, "<th ")
-               .replace(/&lt;\/th&gt;/g, "</th>")
-               .replace(/&lt;td /g, "<td ")
-               .replace(/&lt;\/td&gt;/g, "</td>");
-
-    document.getElementById("articleContent").innerHTML = html;
+    document.getElementById("articleContent").innerHTML = renderMarkdown(text);
   } catch (e) {
     document.getElementById("articleSection").style.display = "none";
   }
 }
+
 function escapeHtml(text) {
   if (!text) return '';
   const div = document.createElement('div');
