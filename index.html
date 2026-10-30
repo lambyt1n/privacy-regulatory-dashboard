@@ -203,29 +203,93 @@ function renderCards() {
   }).join('');
 }
 
+function renderMarkdownTables(text) {
+  const lines = text.split("\n");
+  let result = [];
+  let inTable = false;
+  let tableHtml = "";
+  let isFirstRow = true;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+
+    if (line.startsWith("|") && line.endsWith("|")) {
+      if (!inTable) {
+        inTable = true;
+        isFirstRow = true;
+        tableHtml = '<table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;color:var(--text2)">';
+      }
+      const cells = line.split("|").slice(1, -1).map(c => c.trim());
+
+      // Skip separator lines like |---|---|---|
+      if (cells.every(c => /^[-:\s]+$/.test(c))) {
+        continue;
+      }
+
+      const tag = isFirstRow ? "th" : "td";
+      const cellStyle = isFirstRow
+        ? 'style="border:1px solid var(--border);padding:8px 12px;background:rgba(59,130,246,.08);font-weight:600;text-align:left;color:var(--text)"'
+        : 'style="border:1px solid var(--border);padding:8px 12px"';
+      const row = "<tr>" + cells.map(c => "<" + tag + " " + cellStyle + ">" + escapeHtml(c) + "</" + tag + ">").join("") + "</tr>";
+      tableHtml += row;
+      isFirstRow = false;
+    } else {
+      if (inTable) {
+        tableHtml += "</table>";
+        result.push(tableHtml);
+        inTable = false;
+        tableHtml = "";
+      }
+      result.push(line);
+    }
+  }
+
+  if (inTable) {
+    tableHtml += "</table>";
+    result.push(tableHtml);
+  }
+
+  return result.join("\n");
+}
+
 async function renderArticle() {
   const week = indexData.weeks.find(w => w.date === currentWeek);
   if (!week) return;
   try {
-    const resp = await fetch('data/' + week.article);
+    const resp = await fetch("data/" + week.article);
     if (!resp.ok) {
-      document.getElementById('articleSection').style.display = 'none';
+      document.getElementById("articleSection").style.display = "none";
       return;
     }
     const text = await resp.text();
-    document.getElementById('articleSection').style.display = 'block';
-    let html = escapeHtml(text)
-      .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-      .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-      .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\n/g, '<br>');
-    document.getElementById('articleContent').innerHTML = html;
+    document.getElementById("articleSection").style.display = "block";
+
+    // Process tables first (before escapeHtml)
+    let html = renderMarkdownTables(text);
+
+    // Then escape and process other markdown
+    html = escapeHtml(html)
+      .replace(/^# (.*$)/gm, "<h1>$1</h1>")
+      .replace(/^## (.*$)/gm, "<h2>$1</h2>")
+      .replace(/^### (.*$)/gm, "<h3>$1</h3>")
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\n/g, "<br>");
+
+    // Restore HTML table tags that were escaped
+    html = html.replace(/&lt;table/g, "<table")
+               .replace(/&lt;\/table&gt;/g, "</table>")
+               .replace(/&lt;tr&gt;/g, "<tr>")
+               .replace(/&lt;\/tr&gt;/g, "</tr>")
+               .replace(/&lt;th /g, "<th ")
+               .replace(/&lt;\/th&gt;/g, "</th>")
+               .replace(/&lt;td /g, "<td ")
+               .replace(/&lt;\/td&gt;/g, "</td>");
+
+    document.getElementById("articleContent").innerHTML = html;
   } catch (e) {
-    document.getElementById('articleSection').style.display = 'none';
+    document.getElementById("articleSection").style.display = "none";
   }
 }
-
 function escapeHtml(text) {
   if (!text) return '';
   const div = document.createElement('div');
