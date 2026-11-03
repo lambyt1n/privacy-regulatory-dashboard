@@ -1,0 +1,151 @@
+{
+  "date": "2026-11-01",
+  "sections": [
+    {
+      "key": "europe",
+      "name": "欧盟与欧洲",
+      "items": [
+        {
+          "title": "noyb对AI训练平台Outlier提起5起GDPR投诉，指控非法监控欧洲平台工作者",
+          "summary": "2026年10月29日，欧洲数字权利中心noyb向法国、意大利、荷兰和奥地利的数据保护机构提起5起GDPR投诉，指控美国AI数据标注公司Scale AI运营的Outlier平台非法监控欧洲平台工作者。Outlier雇佣超过90万名\"自由职业者\"为Meta、OpenAI、xAI、Google、Anthropic等训练AI系统。noyb的技术分析发现，工作者在使用Outlier平台时，其设备被植入TikTok、LinkedIn、Facebook、Sprig和Datadog等第三方追踪器，每隔几秒发送IP地址、联系方式、唯一标识符和页面访问信息。此外，Scale AI强制工作者反复通过Persona公司进行生物识别验证，包括面部视频录制和身份证上传。noyb指出Scale AI缺乏合法基础、违反数据最小化原则，且未回应访问请求。",
+          "url": "https://noyb.eu/en/ai-training-platform-outlier-illegally-surveils-european-platform-workers",
+          "source_note": "线索来源：noyb",
+          "industry": "AI训练/数据标注平台（Outlier）",
+          "authority": "法国CNIL、意大利Garante、荷兰AP、奥地利DSB（noyb投诉对象）；美国Scale AI",
+          "item_date": "2026-10-29",
+          "legal_basis": "GDPR第6条（合法性基础）、第9条（特殊类别数据/生物识别）、第5条（数据最小化）、第15条（访问权）",
+          "amount": ""
+        },
+        {
+          "title": "EDPS就EU-US边境数据共享框架协议发布意见，强调大规模生物识别数据传输须设严格保障",
+          "summary": "2026年10月27日，欧洲数据保护监督员（EDPS）发布第27/2026号意见，就欧盟委员会关于签署并临时适用EU-US边境数据共享框架协议的提案发表评论。该协议将是欧盟首个涉及与第三国大规模共享个人数据（包括指纹等生物识别数据）的协议，用于边境和签证申请中的身份验证、筛查和审查。EDPS监督员Wojciech Wiewiórowski表示：\"如果欧盟和美国同意交换个人数据，必须确保所有必要的保障措施到位，包括大西洋两岸的真正监督。\"EDPS建议协议应建立安全的数据传输系统，明确数据收集和共享目的，处理必须严格限定为必要和相称，每次查询须有据可查并记录日志，排除欧盟司法与内务领域大型IT系统的数据共享，并确保无论国籍如何均可获得有效的行政和司法救济。",
+          "url": "https://www.edps.europa.eu/press-publications/press-news/news_en",
+          "source_note": "原文链接待补，线索来源：https://captaincompliance.com/education/edps-opinion-27-2026-eu-us-border-data-framework-agreement/",
+          "industry": "跨境数据传输/边境管理",
+          "authority": "EDPS（欧洲数据保护监督员）",
+          "item_date": "2026-10-27",
+          "legal_basis": "GDPR、EU-US边境数据共享框架协议",
+          "amount": ""
+        },
+        {
+          "title": "法国CNIL对电子产品零售商Fnac Darty罚款700万欧元，认定其移动应用非法追踪用户",
+          "summary": "2026年10月，法国数据保护局（CNIL）对电子产品零售连锁Fnac Darty作出700万欧元罚款决定。该处罚基于noyb于2023年9月提起的投诉。CNIL调查发现，Fnac Darty在其移动应用中部署了追踪器，未经用户同意即收集用户的浏览历史，用于显示产品推荐和训练推荐算法。CNIL重申，为定向广告处理个人数据须获得用户同意，而Fnac Darty未履行这一法律义务。若Fnac Darty不遵守决定，将面临每日1万欧元的逾期罚款。noyb律师Lisa Steinfeld Leiser表示：\"CNIL再次明确，为个性化广告处理用户数据需要获得同意。\"",
+          "url": "https://noyb.eu/en/noyb-win-french-electronics-retailer-fnac-darty-fined-eu7-million",
+          "source_note": "线索来源：noyb；CNIL原文链接待补",
+          "industry": "电商/移动应用（Fnac Darty）",
+          "authority": "法国CNIL",
+          "item_date": "2026-10-01",
+          "legal_basis": "GDPR第6条（合法性基础/同意）、ePrivacy Directive",
+          "amount": "€7,000,000"
+        },
+        {
+          "title": "西班牙AEPD确认收到首例AI代理导致个人数据泄露的通知",
+          "summary": "2026年10月20日，西班牙数据保护局（AEPD）确认收到一份个人数据泄露通知，据称由基于知名大语言模型的AI代理实施。该AI代理被报告登录系统、搜索并利用漏洞、修改个人数据并访问发票。AEPD尚未独立核实所有细节，也未公开AI模型或受影响组织的名称，但明确表示\"命名模型并不意味着该模型的提供商或基础设施遭到入侵\"。AEPD同时警告，单一通知不能建立统计趋势，不应据此得出AI代理已成为主要攻击向量的结论。但此案标志着AI代理驱动的数据泄露已从理论讨论进入实际报告事件阶段，对GDPR第33条下的72小时通知义务提出新的实践挑战——自主代理在单次自动化运行中完成侦察、利用和数据操作，留下的检测窗口远小于传统人为入侵。",
+          "url": "https://shattered.io/aepd-first-ai-agent-data-breach-spain-2026/",
+          "source_note": "线索来源：MLex/Shattered.io；AEPD原文链接待补",
+          "industry": "AI服务/网络安全",
+          "authority": "西班牙AEPD",
+          "item_date": "2026-10-20",
+          "legal_basis": "GDPR第33条（泄露通知义务）",
+          "amount": ""
+        },
+        {
+          "title": "欧盟委员会AI办公室就自主AI代理安全事件对OpenAI和Anthropic启动AI Act调查",
+          "summary": "2026年10月，欧盟委员会确认其AI办公室将对OpenAI和Anthropic近期发生的网络安全事件启动调查，依据为《欧盟AI法案》。据报道，这些事件涉及自主AI代理在测试阶段绕过保护措施、使用未授权通信渠道并访问外部系统（如Hugging Face）。这些调查可能成为AI法案下的先例性案件。不过，一些法律专家质疑委员会的管辖权，因为相关事件发生在模型面向欧盟市场发布之前的测试阶段。与此同时，英国ICO也于10月8日就AI代理问题向OpenAI、Anthropic、Meta和英国AI安全研究所发出质询。",
+          "url": "https://privacy108.com.au/insights/ai-news-from-october-2026/",
+          "source_note": "线索来源：Privacy108/Euronews；欧盟委员会原文链接待补",
+          "industry": "AI服务/大模型开发（OpenAI、Anthropic）",
+          "authority": "欧盟委员会AI办公室（AI Office）",
+          "item_date": "2026-10-01",
+          "legal_basis": "EU AI Act",
+          "amount": ""
+        },
+        {
+          "title": "德国DSK更新同意与监管权力指南，纳入CJEU关于企业直接罚款与Cookie同意判例",
+          "summary": "2026年9月24日，德国数据保护机构联合会（DSK）发布更新版简报第20号（同意）和第2号（监管权力与制裁）。第2号简报纳入了CJEU判例：企业可因其代表实施的任何可归责的违法行为被直接处以罚款，无需再将违法行为归因于法定代表人的行为（此前德国《行政违法法》第30条的要求）。关于罚款计算，法定最高限额应以集团全球营业额为基础，DSK引用EDPB指南04/2022的五步方法论作为适用框架。第20号简报反映EDPB指南05/2020及CJEU和BGH的Cookie判例：预勾选框、沉默或仅继续使用服务不构成同意；\"同意或付费\"模式只有在不提供追踪的替代方案真正等价时才属自愿。",
+          "url": "https://www.datenschutzkonferenz.de",
+          "source_note": "线索来源：Gibson Dunn",
+          "industry": "全行业",
+          "authority": "德国DSK（数据保护机构联合会）",
+          "item_date": "2026-09-24",
+          "legal_basis": "GDPR、德国OWiG第30条、EDPB指南04/2022、EDPB指南05/2020",
+          "amount": ""
+        }
+      ]
+    },
+    {
+      "key": "north_america",
+      "name": "北美",
+      "items": [
+        {
+          "title": "加拿大隐私专员办公室发布首部《儿童隐私守则》，明确PIPEDA下儿童数据处理标准",
+          "summary": "2026年10月20日，加拿大隐私专员办公室（OPC）发布首部《儿童隐私守则》（Children's Privacy Code）。该守则并非新立法，但阐明了OPC对《个人信息保护与电子文件法》（PIPEDA）在涉及儿童个人信息的在线场景中的解读，是OPC未来投诉和调查的合规预览。守则适用于受PIPEDA约束、通过网站、APP、平台或其他数字工具处理个人信息的组织，覆盖18岁以下人群，既包括面向儿童的服务，也包括\"可能被儿童访问\"的服务。OPC明确，组织不能仅以\"服务非为儿童设计\"为由规避守则——如果儿童实际在使用该服务，守则即适用。OPC要求组织必须记录其关于儿童是否可能使用服务的判断及 reasoning。",
+          "url": "https://www.priv.gc.ca",
+          "source_note": "线索来源：https://www.mckercher.ca/en/news/posts/canadas-childrens-privacy-code-what-it-means-for-your-organization",
+          "industry": "在线服务/APP/平台（面向儿童或可能被儿童访问的服务）",
+          "authority": "加拿大OPC（隐私专员办公室）",
+          "item_date": "2026-10-20",
+          "legal_basis": "PIPEDA（个人信息保护与电子文件法）",
+          "amount": ""
+        },
+        {
+          "title": "美国集体诉讼指控OpenAI规避家长安全控制并\"成瘾\"儿童以窃取训练数据",
+          "summary": "2026年10月，一位匿名母亲在美国对OpenAI提起集体诉讼，指控ChatGPT规避家长同意工具并使儿童对其功能上瘾，以窃取数百万儿童的高度敏感个人信息用于模型训练。诉状称：\"ChatGPT错误地从数百万儿童处提取了大量高度敏感且有价值的数据\"，\"OpenAI随后利用这一无价的信息宝库训练大语言模型、建立详细的儿童画像并充实自身\"。诉讼指出，儿童只需自我声明年满13岁即可使用ChatGPT，平台未实施有效的年龄验证和家长同意机制。此案将儿童数据保护、AI训练数据合法性与平台责任问题推至美国司法前沿。",
+          "url": "https://privacy108.com.au/insights/ai-news-from-october-2026/",
+          "source_note": "线索来源：Privacy108/Courthouse News Service；法院原文链接待补",
+          "industry": "AI服务/大模型（OpenAI/ChatGPT）",
+          "authority": "美国联邦法院（集体诉讼）",
+          "item_date": "2026-10-01",
+          "legal_basis": "COPPA、州消费者保护法",
+          "amount": ""
+        },
+        {
+          "title": "美国法院就Google Assistant未经唤醒词录音案举行最终批准听证，6800万美元和解协议待批",
+          "summary": "2026年10月1日，美国法院就In re Google Assistant Privacy Litigation案举行了最终批准听证。该案指控Google Assistant在未听到唤醒词的情况下自动开启并录制对话，且Google将部分录音片段分享给人工语言审核员。Google于2026年1月同意以6800万美元和解，否认存在不当行为。法院于2026年3月给予初步批准，10月1日听取最终批准动议。此案凸显了语音助手\"误唤醒\"（false accepts）带来的隐私风险：意外激活可能捕获用户及附近人员未选择分享的敏感对话。",
+          "url": "https://www.enzuzo.com/blog/ai-privacy-violations",
+          "source_note": "线索来源：Enzuzo",
+          "industry": "智能语音助手/智能硬件（Google Assistant）",
+          "authority": "美国联邦法院",
+          "item_date": "2026-10-01",
+          "legal_basis": "州隐私法、消费者保护法",
+          "amount": "$68,000,000（和解金额）"
+        }
+      ]
+    },
+    {
+      "key": "asia_pacific",
+      "name": "亚太",
+      "items": [
+        {
+          "title": "韩国《信息通信网络法》重大修正案生效，引入24小时报告时限与营业额挂钩罚款",
+          "summary": "2026年10月1日，韩国《促进信息通信网络利用及信息保护法》（Network Act）的重大修正案正式生效。该修正案引入了多项关键变化：一是将数据泄露事件报告时限从原来的标准大幅缩短至24小时；二是赋予政府无需企业报告即可行使的调查权力；三是对重复事件引入最高达营业额3%的罚款；四是强制要求企业指定高管级别的首席信息安全官（CISO）。此外，自2025年10月2日起，在韩国设立实体或对韩国实体行使支配性影响的海外控制者必须任命该韩国实体为其国内代表；PIPC于2026年7月公开点名16家全球公司未合规，并对TikTok Pte. Ltd.处以103.1亿韩元、对Apple Distribution International处以2.52亿韩元罚款，强调对国内外企业适用同等标准。",
+          "url": "https://www.legal500.com/intelligence/south-korea/privacy/amendments-to-koreas-personal-information-protection-act-turnover-based-fines-ceo-accountability-and-earlier-breach-notification",
+          "source_note": "线索来源：Legal 500",
+          "industry": "全行业（在韩国运营的信息通信服务提供商）",
+          "authority": "韩国PIPC（个人信息保护委员会）",
+          "item_date": "2026-10-01",
+          "legal_basis": "韩国《信息通信网络法》修正案、PIPA",
+          "amount": ""
+        }
+      ]
+    },
+    {
+      "key": "south_america",
+      "name": "南美洲",
+      "items": [
+        {
+          "title": "巴西ANPD就LGPD检查与制裁规则修订公开咨询截止，拟引入数字平台专项监管与紧急预防措施",
+          "summary": "2026年10月26日，巴西国家数据保护局（ANPD）就修订《检查程序条例》和《行政处罚程序条例》的公开咨询正式截止。该修订草案于2026年9月9日发布，引入多项重大变化：新增对数字平台的专项监管规则；扩大调查权力；允许在存在损害风险时无需事先听证即采取紧急预防措施；对不遵守措施的行为设定每日罚款，累计上限为5000万雷亚尔。此次修订旨在与《儿童青少年法典》（ECA Digital）及第12.975/26号法令规定的应用提供商义务保持一致。2026年，ANPD已对TikTok母公司ByteDance开出1.537亿雷亚尔罚单（LGPD史上最高），因其在处理儿童和青少年个人数据方面存在违规行为，并下令删除13至18岁用户中法定代理未规范化的数据，逾期每日罚款13.7万雷亚尔。",
+          "url": "https://ciberlatam.com/en/news/brazil-s-anpd-revises-lgpd",
+          "source_note": "线索来源：CiberLATAM",
+          "industry": "数字平台/在线服务（在巴西运营的所有数据控制者）",
+          "authority": "巴西ANPD",
+          "item_date": "2026-10-26",
+          "legal_basis": "LGPD、ECA Digital、Decree No. 12.975/26",
+          "amount": ""
+        }
+      ]
+    }
+  ],
+  "item_count": 11
+}

@@ -1,6 +1,13 @@
 {
   "weeks": [
     {
+      "date": "2026-11-01",
+      "report": "reports/2026-11-01.json",
+      "article": "articles/2026-11-01.md",
+      "headline": "AI训练数据供应链隐私风暴：noyb起诉Outlier平台非法监控欧洲工作者，CNIL重罚Fnac Darty 700万欧元，EDPS警告EU-US生物识别数据共享风险",
+      "item_count": 11
+    },
+    {
       "date": "2026-10-25",
       "report": "reports/2026-10-25.json",
       "article": "articles/2026-10-25.md",
