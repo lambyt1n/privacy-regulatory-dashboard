@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-08",
+  "sections": [
+    {
+      "key": "europe",
+      "name": "欧盟与欧洲",
+      "items": [
+        {
+          "title": "欧盟理事会通过Digital Omnibus谈判立场，GDPR拟为AI训练大开绿灯",
+          "summary": "2026年10月21日，欧盟理事会就Digital Omnibus达成谈判立场，其中Article 88bis拟允许AI公司以\"合法利益\"为法律依据处理个人数据进行AI训练，无需用户同意，覆盖范围包括非客户数据和数十年前的数据。noyb称之为\"数字征收\"。该立场尚需与欧洲议会谈判。",
+          "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/10/21/digital-rulebook-council-agrees-position-to-simplify-data-protection-privacy-and-cyber-reporting-rules/",
+          "source_note": "线索来源：noyb；MLex",
+          "industry": "AI服务、科技平台",
+          "authority": "欧盟理事会",
+          "item_date": "2026-10-21",
+          "legal_basis": "GDPR Article 88bis（拟议）",
+          "amount": ""
+        },
+        {
+          "title": "法国CNIL对Fnac Darty罚款700万欧元：App推荐追踪器未经同意",
+          "summary": "2026年10月22日决定，29日公开。CNIL对Fnac Darty集团两家公司合计罚款700万欧元（600万+100万），因其移动应用通过API向第三方发送用户标识符和浏览数据用于推荐算法训练，未经同意且无视用户拒绝。要求一个月内整改，逾期每天罚1万欧元。",
+          "url": "https://www.cnil.fr/fr/sanction-cookies-app-fnac",
+          "source_note": "线索来源：noyb",
+          "industry": "电商、移动App",
+          "authority": "法国CNIL",
+          "item_date": "2026-10-22",
+          "legal_basis": "法国《信息与自由法》第82条",
+          "amount": "€7,000,000"
+        },
+        {
+          "title": "noyb对Scale AI提起五项GDPR投诉：Outlier平台非法监控欧洲AI训练工作者",
+          "summary": "2026年10月27日，noyb在法国、意大利、荷兰和奥地利对Scale AI提起五项投诉，指控其Outlier平台在90万+自由职业者工作时安装第三方追踪器（最多19个，包括Facebook、LinkedIn、TikTok等），记录击键和鼠标移动；强制反复生物识别验证；且无视数据访问请求。",
+          "url": "https://noyb.eu/en/ai-training-platform-outlier-illegally-surveils-european-platform-workers",
+          "source_note": "线索来源：noyb；MLex；The Register",
+          "industry": "AI训练平台、数据标注服务",
+          "authority": "法国CNIL、意大利Garante、荷兰AP、奥地利DSB",
+          "item_date": "2026-10-27",
+          "legal_basis": "GDPR第5(1)(c)条、第12(3)条、第15条、第25(1)条、第28(1)条",
+          "amount": ""
+        },
+        {
+          "title": "柏林数据保护局认定德国四大政党政治微定向非法",
+          "summary": "2026年10月21日公开决定（决定日期9月24日）。柏林DPA认定CDU、SPD、绿党和左翼党在2021年联邦选举期间使用Facebook基于政治兴趣的定向广告缺乏合法依据，违反GDPR。仅发出谴责，未罚款。AfD案仍在处理中。",
+          "url": "https://noyb.eu/en/noyb-win-german-dpa-finds-microtargeting-major-political-parties-illegal",
+          "source_note": "线索来源：noyb",
+          "industry": "政治广告、社交媒体平台",
+          "authority": "柏林数据保护局（BlnBDI）",
+          "item_date": "2026-09-24",
+          "legal_basis": "GDPR第9条（特殊类别数据）",
+          "amount": ""
+        }
+      ]
+    },
+    {
+      "key": "north_america",
+      "name": "北美",
+      "items": [
+        {
+          "title": "美国联邦法院判决OPM违反隐私法向DOGE提供数千万联邦雇员个人数据",
+          "summary": "2026年10月20日，纽约南区联邦法院在AFGE v. OPM案中判决OPM违反1974年《隐私法》，向DOGE提供数千万现任、前任及潜在联邦雇员的敏感个人信息，未证明可信需求且无视最小权限原则。法院拒绝以DOGE解散为由驳回案件。",
+          "url": "https://dig.watch/updates/court-finds-opm-violated-privacy-act",
+          "source_note": "线索来源：MLex；Electronic Frontier Foundation",
+          "industry": "联邦政府数据管理",
+          "authority": "美国纽约南区联邦地区法院",
+          "item_date": "2026-10-20",
+          "legal_basis": "美国《隐私法》1974年第552a(b)条、第(e)(10)条",
+          "amount": ""
+        }
+      ]
+    },
+    {
+      "key": "court",
+      "name": "法院判决",
+      "items": [
+        {
+          "title": "华盛顿州最高法院判决医院使用Meta Pixel不违反华盛顿隐私法",
+          "summary": "2026年10月8日，华盛顿州最高法院在Baker v. Seattle Children's Hospital案中判决，医院在公共网站上使用Meta Pixel跟踪用户活动不违反华盛顿隐私法，因为该法仅保护\"两个或多个人之间\"的通信，而用户与自动化网站之间的通信不符合该定义。",
+          "url": "https://www.courts.wa.gov/opinions/pdf/1045905.pdf",
+          "source_note": "线索来源：Sidley Austin LLP",
+          "industry": "医疗健康、网站追踪技术",
+          "authority": "华盛顿州最高法院",
+          "item_date": "2026-10-08",
+          "legal_basis": "华盛顿隐私法（WPA）",
+          "amount": ""
+        }
+      ]
+    }
+  ]
+}
