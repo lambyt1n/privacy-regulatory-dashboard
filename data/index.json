@@ -1,6 +1,13 @@
 {
   "weeks": [
     {
+      "date": "2026-11-08",
+      "report": "reports/2026-11-08.json",
+      "article": "articles/2026-11-08.md",
+      "headline": "欧盟理事会拟允许AI公司以合法利益处理个人数据训练AI，noyb称之为数字征收；法国CNIL对Fnac Darty罚款700万欧元",
+      "item_count": 6
+    },
+    {
       "date": "2026-11-01",
       "report": "reports/2026-11-01.json",
       "article": "articles/2026-11-01.md",
